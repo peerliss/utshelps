@@ -51,6 +51,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.utshelps.utshelpsapp.HomeActivity" />
         </activity>
+        <activity
+            android:name=".BookingHistoryActivity"
+            android:label="@string/title_activity_booking_history"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
