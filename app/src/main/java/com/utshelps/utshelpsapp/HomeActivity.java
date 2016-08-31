@@ -7,9 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.view.Menu;
 import android.view.View;
+import android.view.MenuItem;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,36 +21,39 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
         View profileLayout = findViewById(R.id.profile_layout);
-        profileLayout.setOnClickListener(this);
 
         View bookingsLayout = findViewById(R.id.myBooking_layout);
-        bookingsLayout.setOnClickListener(this);
 
         View sessionsLayout = findViewById(R.id.view_sessions_layout);
-        sessionsLayout.setOnClickListener(this);
 
         View historyLayout = findViewById(R.id.history_layout);
-        historyLayout.setOnClickListener(this);
 
     }
 
     @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.profile_layout:
-                Intent profileIntent = new Intent(this, ProfileActivity.class);
-                startActivity(profileIntent);
-            case R.id.myBooking_layout:
-                Intent bookingInent = new Intent(this, MyBookingActivity.class);
-                startActivity(bookingInent);
-            case R.id.view_sessions_layout:
-                Intent sessionsIntent = new Intent(this, AvailableSessionsActivity.class);
-                startActivity(sessionsIntent);
-            case R.id.history_layout:
-                Intent historyIntent = new Intent(this, BookingHistoryActivity.class);
-                startActivity(historyIntent);
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
+    public void myProfile(View view) {
+        Intent profileIntent = new Intent(this, ProfileActivity.class);
+        startActivity(profileIntent);
+    }
+
+    public void myBookings(View view) {
+        Intent bookingIntent = new Intent(this, MyBookingActivity.class);
+        startActivity(bookingIntent);
+    }
+
+    public void viewSessions(View view) {
+        Intent sessionsIntent = new Intent(this, AvailableSessionsActivity.class);
+        startActivity(sessionsIntent);
+    }
+
+    public void myHistory(View view) {
+        Intent historyIntent = new Intent(this, BookingHistoryActivity.class);
+        startActivity(historyIntent);
     }
 }

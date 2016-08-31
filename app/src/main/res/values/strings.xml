@@ -17,4 +17,5 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_available_sessions">AvailableSessionsActivity</string>
     <string name="title_activity_booking_history">BookingHistoryActivity</string>
+    <string name="available_sessions">Available Sessions</string>
 </resources>
