@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.utshelps.utshelpsapp.HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+
+    <Button
+        android:id="@+id/profilebtn"
+        android:layout_width="205dp"
+        android:layout_height="165dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#9DB0C4"
+        android:paddingTop="200px"
+        android:text="@string/my_profile"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/bookbtn"
+        android:layout_width="205dp"
+        android:layout_height="165dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="#6D9FC7"
+        android:paddingTop="200px"
+        android:text="@string/my_booking"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/viewbtn"
+        android:layout_width="200dp"
+        android:layout_height="175dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profilebtn"
+        android:background="#4658C2"
+        android:paddingTop="300px"
+        android:text="@string/view_session"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/historybtn"
+        android:layout_width="200dp"
+        android:layout_height="188dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewbtn"
+        android:background="#33437A"
+        android:paddingTop="300px"
+        android:text="@string/booking_history"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_toLeftOf="@+id/imageView5"
+        android:layout_toStartOf="@+id/imageView5"
+        android:elevation="2dp"
+        android:src="@drawable/stu2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:layout_toEndOf="@+id/imageView5"
+        android:layout_toRightOf="@+id/imageView5"
+        android:elevation="2dp"
+        android:src="@drawable/book2" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="450px"
+        android:layout_height="400px"
+        android:layout_below="@+id/profilebtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:elevation="2dp"
+        android:src="@drawable/view" />
+    " />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="450px"
+        android:layout_height="350px"
+        android:layout_alignTop="@+id/historybtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:elevation="2dp"
+        android:src="@drawable/history" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="1600px"
+        android:layout_height="400px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/homebtn"
+        android:background="#C9C9C9" />
+
+    <ImageButton
+        android:id="@+id/homebtn"
+        android:layout_width="200px"
+        android:layout_height="220px"
+        android:layout_marginLeft="230px"
+        android:layout_marginTop="1850px"
+        android:background="@null"
+        android:src="@drawable/home2" />
+
+    <ImageButton
+        android:id="@+id/conbtn"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:layout_marginLeft="650px"
+        android:layout_marginTop="1880px"
+        android:background="@null"
+        android:src="@drawable/phone3" />
+
+    <ImageButton
+        android:id="@+id/setbtn"
+        android:layout_width="250px"
+        android:layout_height="250px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="1050px"
+        android:layout_marginTop="1860px"
+        android:background="@null"
+        android:src="@drawable/set2" />
+
+</RelativeLayout>
