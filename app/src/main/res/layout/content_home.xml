@@ -31,7 +31,6 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="3dp"
                 android:layout_marginRight="3dp"
-                android:layout_marginTop="3dp"
                 android:layout_weight="1"
                 android:background="#9DB0C4"
                 android:gravity="center"
@@ -55,7 +54,6 @@
                 android:id="@+id/myBooking_layout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="4.5dp"
                 android:layout_weight="1"
                 android:background="#6D9FC7"
                 android:gravity="center"
@@ -107,7 +105,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-
+            android:id="@+id/history_layout"
             android:layout_weight="1"
             android:background="#33437A"
             android:gravity="center"
