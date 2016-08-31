@@ -10,8 +10,8 @@
     <string name="about_us">About Us</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="my_profile">My Profile</string>
-    <string name="my_booking">My Booking</string>
-    <string name="view_session">View Session</string>
+    <string name="my_booking">My Bookings</string>
+    <string name="view_session">View All Sessions</string>
     <string name="booking_history">Booking History</string>
     <string name="title_activity_my_booking">MyBookingActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>

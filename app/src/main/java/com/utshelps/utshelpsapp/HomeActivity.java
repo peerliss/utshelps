@@ -18,4 +18,6 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void myProfile(View view) {
+    }
 }
