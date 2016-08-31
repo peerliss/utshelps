@@ -35,7 +35,6 @@
                 android:layout_weight="1"
                 android:background="#9DB0C4"
                 android:gravity="center"
-                android:onClick="myProfile"
                 android:orientation="vertical">
 
                 <ImageView
