@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.utshelps.utshelpsapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,9 +22,44 @@
         </activity>
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".MyBookingActivity"
+            android:label="@string/my_booking"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/my_profile"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".AvailableSessionsActivity"
+            android:label="@string/available_sessions"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".BookingHistoryActivity"
+            android:label="@string/booking_history"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

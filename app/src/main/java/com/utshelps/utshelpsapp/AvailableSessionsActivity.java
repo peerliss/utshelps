@@ -9,12 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ProfileActivity extends AppCompatActivity {
+public class AvailableSessionsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_available_sessions);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
