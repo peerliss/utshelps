@@ -57,4 +57,13 @@
     <string name="data_structure">Data Structure</string>
     <string name="interaction_design">Interaction Design</string>
     <string name="software_architecture">Software Architecture</string>
+    <string name="address">Address:</string>
+    <string name="_123_pitt_street">123 Pitt Street</string>
+    <string name="workshop_001">Workshop 001</string>
+    <string name="thursday_25_august_2016">Thursday, 25 August 2016</string>
+    <string name="_13_00_15_00">13:00 - 15:00</string>
+    <string name="cb10_01_105">CB10.01.105</string>
+    <string name="view_detail">View Detail</string>
+    <string name="cancel_booking">Cancel Booking</string>
+    <string name="waiting_list">Waiting List</string>
 </resources>
