@@ -1,333 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.utshelps.utshelpsapp.ProfileActivity"
-    tools:showIn="@layout/activity_profile">
+    tools:showIn="@layout/activity_profile"
+    android:background="#d5d6d6">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/stu2" />
+
+        <Button
+            android:id="@+id/changeProfilePic_button"
+            android:layout_width="215dp"
+            android:layout_height="45dp"
+            android:background="#3498DB"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/change_profile_picture"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:id="@+id/linearLayout"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingTop="15dp">
+                android:layout_weight="1"
+                android:text="@string/student_name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:paddingBottom="5dp"
-                    android:src="@drawable/stu2" />
-
-                <Button
-                    android:id="@+id/changeProfilePic_button"
-                    android:layout_width="215dp"
-                    android:layout_height="40dp"
-                    android:background="#3498DB"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/change_profile_picture"
-                    android:textColor="@color/white"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <TableLayout
-                android:id="@+id/profile_table_layout"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:stretchColumns="1">
-
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/student_name_field"
-                        android:layout_column="0"
-                        android:text="@string/student_name" />
-
-                    <TextView
-                        android:id="@+id/student_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text="@string/timothy_dalton"
-                        android:textStyle="bold" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/preferredName_field"
-                        android:layout_column="0"
-                        android:text="@string/preferred_first_name" />
-
-                    <EditText
-                        android:id="@+id/preferredName_editText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:ems="10"
-                        android:inputType="textPersonName" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/faculty_field"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="0"
-                        android:text="@string/faculty" />
-
-                    <TextView
-                        android:id="@+id/faculty"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text="@string/engineering_and_information_technology" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/course_field"
-                        android:layout_column="0"
-                        android:text="@string/course" />
-
-                    <TextView
-                        android:id="@+id/course_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text="@string/c10219" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/email_field"
-                        android:layout_column="0"
-                        android:text="@string/email" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text="@string/dummy_email"
-                        android:textStyle="bold" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/phone_field"
-                        android:layout_column="0"
-                        android:text="@string/phone" />
-
-                    <EditText
-                        android:id="@+id/phone_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:ems="10"
-                        android:inputType="phone"
-                        android:text="@string/dummy_number" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/dob_field"
-                        android:layout_column="0"
-                        android:text="@string/dob" />
-
-                    <TextView
-                        android:id="@+id/dob"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text="@string/dummy_dob" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_column="0"
-                        android:text="@string/gender" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_column="1">
-
-                        <RadioButton
-                            android:id="@+id/male_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/male" />
-
-                        <RadioButton
-                            android:id="@+id/female_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:text="@string/female" />
-
-                        <RadioButton
-                            android:id="@+id/unspecified_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/unspecified" />
-                    </RadioGroup>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/degree_field"
-                        android:layout_column="0"
-                        android:text="@string/degree" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_column="1">
-
-                        <RadioButton
-                            android:id="@+id/underGrad_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/undergraduate" />
-
-                        <RadioButton
-                            android:id="@+id/postGrad_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@string/postgraduate" />
-                    </RadioGroup>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/year_field"
-                        android:layout_column="0"
-                        android:text="@string/year" />
-
-                    <Spinner
-                        android:id="@+id/year_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/status_field"
-                        android:layout_column="0"
-                        android:text="@string/status" />
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_column="1">
-
-                        <RadioButton
-                            android:id="@+id/permanent_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/permanent" />
-
-                        <RadioButton
-                            android:id="@+id/international_radioButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/international" />
-                    </RadioGroup>
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/firstLang_field"
-                        android:layout_column="0"
-                        android:text="@string/first_language" />
-
-                    <Spinner
-                        android:id="@+id/lang_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/countryOrigin_field"
-                        android:layout_column="0"
-                        android:text="@string/country_of_origin" />
-
-                    <Spinner
-                        android:id="@+id/country_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1" />
-                </TableRow>
-            </TableLayout>
-
-
-            <Button
-                android:id="@+id/updateProfile_button"
-                android:layout_width="215dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:background="#666666"
-                android:text="@string/update_profile"
-                android:textColor="@color/white" />
+                android:layout_weight="1"
+                android:text="@string/timothy_dalton"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
-</ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/email"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dummy_email"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/address"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/_123_pitt_street"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dob"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dummy_dob"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/updateProfile_button"
+        android:layout_width="215dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="#666666"
+        android:text="@string/edit_profile"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>
