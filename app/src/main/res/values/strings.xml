@@ -66,4 +66,26 @@
     <string name="view_detail">View Detail</string>
     <string name="cancel_booking">Cancel Booking</string>
     <string name="waiting_list">Waiting List</string>
+    <string name="log_out">Log out</string>
+    <string name="date">Date:</string>
+    <string name="_25_august_2016">25 August 2016</string>
+    <string name="time">Time:</string>
+    <string name="location">Location:</string>
+    <string name="topics">Topics:</string>
+    <string name="academic_writing">Academic Writing</string>
+    <string name="set_reminder">Set reminder</string>
+    <string name="record_attendance">Record attendance</string>
+    <string name="title_activity_booking_detail">Booking Details</string>
+    <string name="title_activity_contact">Contact Us</string>
+    <string name="helps_office_cb_01_05_25">HELPS Office (CB.01.05.25)</string>
+    <string name="uts_blake_library_research_helpdesk">UTS Blake Library (Research helpdesk)</string>
+    <string name="monday_to_thursday_12noon_6pm">Monday to Thursday: 12noon - 6pm</string>
+    <string name="friday_12noon_5pm">Friday: 12noon - 5pm</string>
+    <string name="monday_to_thursday_4pm_7pm">Monday to Thursday: 4pm - 7pm</string>
+    <string name="saturday_1pm_4pm">Saturday: 1pm - 4pm</string>
+    <string name="online_chat">Online chat</string>
+    <string name="title_activity_about_us">About Us</string>
+    <string name="about_helps">About HELPS</string>
+    <string name="helps_text">Higher Education Language and Presentation Support (HELPS) provides non-credited English language and academic literacy support to UTS undergraduate and postgraduate coursework students.</string>
+    <string name="helps_text2">At HELPS, we can enhance your learning experience by providing individual and group support in a friendly and respectful environment. We can also help you become an independent and confident learner through the development of your English language and academic understanding, so you can reach your study and career goals.</string>
 </resources>
