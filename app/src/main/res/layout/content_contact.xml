@@ -18,28 +18,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:layout_marginTop="30dp"
         android:text="@string/helps_office_cb_01_05_25"
         android:textColor="@color/black"
-        android:layout_marginBottom="25dp"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="17sp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="@string/monday_to_thursday_12noon_6pm"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:textColor="@color/black"
         android:layout_marginBottom="15dp"
-        android:text="@string/friday_12noon_5pm"/>
+        android:text="@string/friday_12noon_5pm"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,30 +53,47 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:textSize="17sp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="@string/monday_to_thursday_4pm_7pm"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/saturday_1pm_4pm"
         android:textColor="@color/black"
-        android:layout_marginBottom="15dp"
-        android:text="@string/saturday_1pm_4pm"/>
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/helps_phone"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/helps_email"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:paddingLeft="20dp"
-        android:paddingStart="20dp"
-        android:paddingRight="20dp"
-        android:paddingEnd="20dp"
-        android:text="@string/online_chat"
+        android:layout_marginTop="60dp"
         android:background="@color/blueButton"
-        android:textColor="@color/white"/>
+        android:paddingEnd="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingStart="20dp"
+        android:text="@string/online_chat"
+        android:textColor="@color/white" />
 
 </LinearLayout>
