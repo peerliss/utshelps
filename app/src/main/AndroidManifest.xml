@@ -87,6 +87,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.utshelps.utshelpsapp.HomeActivity" />
         </activity>
+        <activity
+            android:name=".SessionDetails"
+            android:label="@string/title_activity_session_details"
+            android:parentActivityName=".AvailableSessionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.utshelps.utshelpsapp.AvailableSessionsActivity" />
+        </activity>
     </application>
 
 </manifest>

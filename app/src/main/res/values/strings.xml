@@ -90,4 +90,8 @@
     <string name="helps_text2">At HELPS, we can enhance your learning experience by providing individual and group support in a friendly and respectful environment. We can also help you become an independent and confident learner through the development of your English language and academic understanding, so you can reach your study and career goals.</string>
     <string name="helps_phone">Phone: (02) 9514 9733</string>
     <string name="helps_email">Email: helps@uts.edu.au</string>
+    <string name="reminderBtn">Do you want to get informed by SMS/Email?</string>
+    <string name="title_activity_session_details">SessionDetails</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="attendance_recorded">Attendance Recorded</string>
 </resources>

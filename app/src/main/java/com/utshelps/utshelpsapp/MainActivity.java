@@ -9,8 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText studentID;
+    private EditText studentPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        studentID = (EditText) findViewById(R.id.student_id);
+        studentPassword = (EditText) findViewById(R.id.student_password);
     }
 
     /*@Override
@@ -39,7 +48,15 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
     public void Login(View view) {
+        String stringID = studentID.getText().toString();
+        String stringPassword = studentPassword.getText().toString();
         Intent loginIntent = new Intent(MainActivity.this, HomeActivity.class);
         startActivity(loginIntent);
+
+        /*if (stringID == "12345678"*//* || stringPassword == "12345678"*//*) {
+            startActivity(loginIntent);
+        }
+        else
+            Toast.makeText(MainActivity.this, "Invalid ID or Password", Toast.LENGTH_SHORT).show();*/
     }
 }
