@@ -26,7 +26,6 @@
         android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="@string/student_id"
-        android:inputType="number"
         android:paddingBottom="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -54,10 +53,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/student_password"
         android:layout_marginBottom="25dp"
-        android:background="@color/red"
+        android:background="#3498DB"
         android:gravity="center"
         android:text="@string/login"
-        android:onClick="Login"
+
         android:textColor="@color/white"
         android:textSize="20sp" />
 
