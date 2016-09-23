@@ -27,17 +27,6 @@
             android:layout_height="170dp"
             android:paddingBottom="5dp"
             android:src="@drawable/stu2" />
-
-        <Button
-            android:id="@+id/changeProfilePic_button"
-            android:layout_width="215dp"
-            android:layout_height="45dp"
-            android:background="#3498DB"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="@string/change_profile_picture"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,13 +37,13 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
             <TextView
@@ -67,12 +56,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/timothy_dalton"
+                android:inputType="textPersonName"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -81,7 +70,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
             <TextView
@@ -94,12 +83,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_email"
+                android:inputType="textEmailAddress"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -108,7 +97,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <TextView
@@ -121,12 +111,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/_123_pitt_street"
+                android:inputType="textPostalAddress"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -135,7 +125,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
 
             <TextView
@@ -148,12 +138,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileDOB"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_dob"
+                android:inputType="date"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -176,5 +166,17 @@
         android:text="@string/edit_profile"
         android:textColor="@color/white"
         android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="215dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="#666666"
+        android:text="@string/submit"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
 </LinearLayout>
