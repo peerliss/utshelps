@@ -14,6 +14,9 @@ import android.widget.Button;
 public class AvailableSessionsActivity extends AppCompatActivity {
 
     public static final String TITLE = "title";
+    public static final String SESSION_ONE = "session_one";
+    public static final String SESSION_TWO = "session_two";
+    public static final String SESSION_THREE = "session_three";
     Button writingBtn;
     Button readingBtn;
     Button speakingBtn;
@@ -47,6 +50,9 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = readingBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Communication/Reading/-KSOZGSpiioiBe0xnmZX"));
+        intent.putExtra(SESSION_TWO, getSession("Communication/Reading/-KSOZRaBry-_TnGagsvw"));
+        intent.putExtra(SESSION_THREE, getSession("Communication/Reading/-KSOZYYmZrSaTCiRmk4T"));
         startActivity(intent);
     }
 
@@ -54,6 +60,8 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = writingBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Communication/Writing/-KSOWwFjZSCDxrRB8KNA"));
+        intent.putExtra(SESSION_TWO, getSession("Communication/Writing/-KSOXFVVVca8vvSFYILg"));
         startActivity(intent);
     }
 
@@ -61,12 +69,17 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = speakingBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Communication/Speaking/-KSOYCZSwyWS5lDbEgZ1"));
+        intent.putExtra(SESSION_TWO, getSession("Communication/Speaking/-KSOYYdGcCA8ysNWP38x"));
         startActivity(intent);
     }
 
     public void listeningSession(View view) {
         String title = listeningBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
+        intent.putExtra(SESSION_ONE, getSession("Communication/Listening/-KSO_0Rud0ud9qTeadTj"));
+        intent.putExtra(SESSION_TWO, getSession("Communication/Listening/-KSO_9Ckjn7VWUwpsjEc"));
+        intent.putExtra(SESSION_THREE, getSession("Communication/Listening/-KSO_KJMYErmTO7_3FZZ"));
         intent.putExtra(TITLE, title);
         startActivity(intent);
     }
@@ -75,6 +88,8 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = dataStructureBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Upass/DSA/-KSOaV3HDb8tLH-V_iTJ"));
+        intent.putExtra(SESSION_TWO, getSession("Upass/DSA/-KSOas8tk3VPS0o3_Lar"));
         startActivity(intent);
     }
 
@@ -82,6 +97,8 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = programmingBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Upass/Programming/-KSOdiGcDQp4vsQ4kO4g"));
+        intent.putExtra(SESSION_TWO, getSession("Upass/Programming/-KSOdoH35dL058ZbskdQ"));
         startActivity(intent);
     }
 
@@ -89,6 +106,8 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = interactionDesignBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Upass/Interaction Design/-KSOctQAyQlU8I_sw2JZ"));
+        intent.putExtra(SESSION_TWO, getSession("Upass/Interaction Design/-KSOdBxjOzLJAf72Pg-M"));
         startActivity(intent);
     }
 
@@ -96,7 +115,14 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         String title = softwareArchitectureBtn.getText().toString();
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(TITLE, title);
+        intent.putExtra(SESSION_ONE, getSession("Upass/Software Architecture/-KSObxsSCy3SL3xYzrZP"));
+        intent.putExtra(SESSION_TWO, getSession("Upass/Software Architecture/-KSOc51FBN2jw6DAY-xw"));
         startActivity(intent);
+    }
+
+    private String getSession(String id) {
+        String link = "https://utshelps-1574c.firebaseio.com/Sessions/" + id;
+        return link;
     }
 
     /*@Override
