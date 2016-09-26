@@ -48,10 +48,10 @@
     <string name="first_language">First Language:</string>
     <string name="country_of_origin">Country of Origin:</string>
     <string name="communication">Communication</string>
-    <string name="writing_skills">Writing Skills</string>
-    <string name="reading_skills">Reading Skills</string>
-    <string name="speaking_skills">Speaking Skills</string>
-    <string name="listening_skills">Listening Skills</string>
+    <string name="writing_skills">Writing</string>
+    <string name="reading_skills">Reading</string>
+    <string name="speaking_skills">Speaking</string>
+    <string name="listening_skills">Listening</string>
     <string name="upass">UPASS</string>
     <string name="programming">Programming</string>
     <string name="data_structure">Data Structure</string>

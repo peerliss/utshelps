@@ -90,7 +90,7 @@
         </activity>
         <activity
             android:name=".SessionDetails"
-            android:label="@string/title_activity_session_details"
+            android:label="@string/available_sessions"
             android:parentActivityName=".AvailableSessionsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
