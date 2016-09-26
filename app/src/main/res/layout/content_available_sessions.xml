@@ -38,6 +38,7 @@
             android:layout_weight="1"
             android:layout_marginBottom="8dp"
             android:background="#3497da"
+            android:onClick="writingSession"
             android:text="@string/writing_skills"
             android:textColor="@color/white"
             android:textSize="15sp" />

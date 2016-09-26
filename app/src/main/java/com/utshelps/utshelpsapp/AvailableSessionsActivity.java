@@ -1,5 +1,6 @@
 package com.utshelps.utshelpsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,11 @@ public class AvailableSessionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void writingSession(View view) {
+        Intent writingIntent = new Intent(this, SessionDetails.class);
+        startActivity(writingIntent);
     }
 
     /*@Override
