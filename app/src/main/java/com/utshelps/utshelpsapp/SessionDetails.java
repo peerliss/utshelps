@@ -16,7 +16,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Map;
 
 public class SessionDetails extends AppCompatActivity {
 
@@ -29,6 +38,13 @@ public class SessionDetails extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+//    private Firebase rootRef;
+    private FirebaseAuth mAuth;
+
+//    private TextView dateTv;
+//    private TextView timeTv;
+//    private TextView locationTv;
+//    private TextView topicTv;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -51,30 +67,8 @@ public class SessionDetails extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        mAuth = FirebaseAuth.getInstance();
 
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_session_details, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -106,8 +100,37 @@ public class SessionDetails extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
+            String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
+            titleTv.setText(titleString);
+
+            final TextView dateTv = (TextView) rootView.findViewById(R.id.session_date);
+            final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
+            final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
+            final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
+
+            String link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
+            Firebase rootRef = new Firebase(link);
+            rootRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Map<String, String> map = dataSnapshot.getValue(Map.class);
+                    String date = map.get("Date");
+                    String time = map.get("Time");
+                    String location = map.get("Location");
+                    String topic = map.get("Topic");
+                    dateTv.setText(date);
+                    timeTv.setText(time);
+                    locationTv.setText(location);
+                    topicTv.setText(topic);
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
             return rootView;
         }
     }
@@ -131,8 +154,8 @@ public class SessionDetails extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
 
         @Override

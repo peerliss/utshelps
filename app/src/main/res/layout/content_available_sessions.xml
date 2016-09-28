@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#d5d6d6"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -13,8 +14,7 @@
     android:weightSum="2"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.utshelps.utshelpsapp.AvailableSessionsActivity"
-    tools:showIn="@layout/activity_available_sessions"
-    android:background="#d5d6d6">
+    tools:showIn="@layout/activity_available_sessions">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,49 +25,57 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="0dp"
+            android:layout_weight="1"
             android:text="@string/communication"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
         <Button
+            android:id="@+id/writingBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="writingSession"
             android:text="@string/writing_skills"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/readingBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="readingSession"
             android:text="@string/reading_skills"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/speakingBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="speakingSession"
             android:text="@string/speaking_skills"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/listeningBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="12dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="listeningSession"
             android:text="@string/listening_skills"
             android:textColor="@color/white"
             android:textSize="15sp" />
@@ -87,49 +95,57 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="12dp"
             android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:text="@string/upass"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp" />
 
         <Button
+            android:id="@+id/dataStructureBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="dataStructureSession"
             android:text="@string/data_structure"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/programmingBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="programmingSession"
             android:text="@string/programming"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/interactionDesignBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="interactionDesignSession"
             android:text="@string/interaction_design"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
         <Button
+            android:id="@+id/softwareArchitectureBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="8dp"
+            android:layout_weight="1"
             android:background="#3497da"
+            android:onClick="softwareArchitectureSession"
             android:text="@string/software_architecture"
             android:textColor="@color/white"
             android:textSize="15sp" />

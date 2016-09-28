@@ -73,8 +73,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intentContact);
                 break;
             case R.id.action_logout:
-                /*Intent intentHome = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(intentHome);*/
                 startSignOut();
                 break;
             case R.id.action_about:
