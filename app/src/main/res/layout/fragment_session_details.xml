@@ -2,39 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/background"
     tools:context="com.utshelps.utshelpsapp.SessionDetails$PlaceholderFragment">
 
     <TextView
         android:id="@+id/session_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textSize="39sp" />
 
     <ImageView
-        android:layout_width="200dp"
         android:id="@+id/session_image"
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_below="@id/session_title"
         android:layout_centerHorizontal="true"
         android:src="@drawable/wksp" />
 
     <LinearLayout
+        android:id="@+id/session_infoLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/session_image"
         android:layout_marginEnd="25dp"
         android:layout_marginLeft="25dp"
-        android:id="@+id/session_infoLayout"
         android:layout_marginRight="25dp"
         android:layout_marginStart="25dp"
-        android:layout_below="@id/session_image"
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
@@ -146,12 +146,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:background="@color/blueButton"
-        android:textColor="@color/white"
-        android:text="@string/book_session"
+        android:layout_below="@id/session_infoLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:layout_below="@id/session_infoLayout"/>
+        android:background="@color/blueButton"
+        android:padding="15dp"
+        android:text="@string/book_session"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

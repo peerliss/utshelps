@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
@@ -107,7 +108,6 @@ public class SessionDetails extends AppCompatActivity {
             final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
             final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
-
 
             String link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
             Firebase rootRef = new Firebase(link);

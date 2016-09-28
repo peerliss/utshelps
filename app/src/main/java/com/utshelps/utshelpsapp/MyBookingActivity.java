@@ -27,29 +27,34 @@ public class MyBookingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        cancelBtn = (Button) findViewById(R.id.myBooking_cancelBtn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyBookingActivity.this);
-                alertDialog.setTitle("Are you sure you want to cancel your booking?");
-                alertDialog.setCancelable(true);
-                alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        try {
+            cancelBtn = (Button) findViewById(R.id.myBooking_cancelBtn);
+            cancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyBookingActivity.this);
+                    alertDialog.setTitle("Are you sure you want to cancel your booking?");
+                    alertDialog.setCancelable(true);
+                    alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                });
-                alertDialog.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "You have successfully been withdrawn", Toast.LENGTH_LONG).show();
-                    }
-                });
-                alertDialog.create();
-                alertDialog.show();
-            }
-        });
+                        }
+                    });
+                    alertDialog.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(), "You have successfully been withdrawn", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    alertDialog.create();
+                    alertDialog.show();
+                }
+            });
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /*@Override
