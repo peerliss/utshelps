@@ -38,7 +38,7 @@ public class SessionDetails extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-//    private Firebase rootRef;
+    //    private Firebase rootRef;
     private FirebaseAuth mAuth;
 
 //    private TextView dateTv;
@@ -80,6 +80,8 @@ public class SessionDetails extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static int position;
+
 
         public PlaceholderFragment() {
         }
@@ -92,6 +94,159 @@ public class SessionDetails extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            position = sectionNumber;
+
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
+            TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
+            String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
+            titleTv.setText(titleString);
+
+            String link = "";
+
+            final TextView dateTv = (TextView) rootView.findViewById(R.id.session_date);
+            final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
+            final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
+            final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
+
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 1:
+                    link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
+                    break;
+                case 2:
+                    link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_TWO);
+                    break;
+                case 3:
+                    link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
+                    break;
+            }
+
+            try {
+                Firebase rootRef = new Firebase(link);
+                rootRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Map<String, String> map = dataSnapshot.getValue(Map.class);
+                        String date = map.get("Date");
+                        String time = map.get("Time");
+                        String location = map.get("Location");
+                        String topic = map.get("Topic");
+                        dateTv.setText(date);
+                        timeTv.setText(time);
+                        locationTv.setText(location);
+                        topicTv.setText(topic);
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+
+                });
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return rootView;
+        }
+    }
+
+    /*public static class PlaceholderFragmentTwo extends Fragment {
+        *//**
+     * The fragment argument representing the section number for this
+     * fragment.
+     *//*
+        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static int position;
+        private static String link;
+
+        public PlaceholderFragmentTwo() {
+        }
+
+        *//**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     *//*
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            position = sectionNumber;
+
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
+            TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
+            String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
+            titleTv.setText(titleString);
+
+            getArguments().getInt(ARG_SECTION_NUMBER);
+            final TextView dateTv = (TextView) rootView.findViewById(R.id.session_date);
+            final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
+            final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
+            final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
+
+            String linkTwo = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_TWO);
+            Firebase rootRef = new Firebase(linkTwo);
+            rootRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Map<String, String> map = dataSnapshot.getValue(Map.class);
+                    String date = map.get("Date");
+                    String time = map.get("Time");
+                    String location = map.get("Location");
+                    String topic = map.get("Topic");
+                    dateTv.setText(date);
+                    timeTv.setText(time);
+                    locationTv.setText(getArguments().getInt(ARG_SECTION_NUMBER));
+                    topicTv.setText(topic);
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+
+
+            return rootView;
+        }
+
+    }
+
+    public static class PlaceholderFragmentThree extends Fragment {
+        *//**
+     * The fragment argument representing the section number for this
+     * fragment.
+     *//*
+        private static final String ARG_SECTION_NUMBER = "section_number";
+        private static int position;
+        private static String link;
+
+        public PlaceholderFragmentThree() {
+        }
+
+        *//**
+     * Returns a new instance of this fragment for the given section
+     * number.
+     *//*
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            position = sectionNumber;
+
             fragment.setArguments(args);
             return fragment;
         }
@@ -109,8 +264,9 @@ public class SessionDetails extends AppCompatActivity {
             final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
 
-            String link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
-            Firebase rootRef = new Firebase(link);
+
+            String linkThree = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
+            Firebase rootRef = new Firebase(linkThree);
             rootRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -131,9 +287,11 @@ public class SessionDetails extends AppCompatActivity {
                 }
             });
 
+
             return rootView;
         }
-    }
+
+    }*/
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -150,25 +308,40 @@ public class SessionDetails extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
+            /*switch (position) {
+                case 0:
+                    return PlaceholderFragment.newInstance(position + 1);
+                case 1:
+                    return PlaceholderFragmentTwo.newInstance(position + 1);
+                case 2:
+                    return PlaceholderFragmentThree.newInstance(position);
+            }
+            return null;*/
         }
 
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            if (getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE) != null) {
+                return 3;
+            } else
+                return 2;
         }
 
-        @Override
+        /*@Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
+                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
                     return "SECTION 1";
                 case 1:
+                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_TWO);
                     return "SECTION 2";
                 case 2:
+                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
                     return "SECTION 3";
             }
             return null;
-        }
+        }*/
     }
 }
