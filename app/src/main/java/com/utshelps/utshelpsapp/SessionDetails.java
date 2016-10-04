@@ -1,5 +1,6 @@
 package com.utshelps.utshelpsapp;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +26,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SessionDetails extends AppCompatActivity {
@@ -81,6 +85,7 @@ public class SessionDetails extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static int position;
+        private FirebaseAuth.AuthStateListener mAuth;
 
 
         public PlaceholderFragment() {
@@ -114,6 +119,8 @@ public class SessionDetails extends AppCompatActivity {
             final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
             final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
+            final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
+
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
@@ -129,18 +136,54 @@ public class SessionDetails extends AppCompatActivity {
 
             try {
                 Firebase rootRef = new Firebase(link);
+
                 rootRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Map<String, String> map = dataSnapshot.getValue(Map.class);
-                        String date = map.get("Date");
-                        String time = map.get("Time");
-                        String location = map.get("Location");
-                        String topic = map.get("Topic");
+                        final String date = map.get("Date");
+                        final String time = map.get("Time");
+                        final String location = map.get("Location");
+                        final String topic = map.get("Topic");
+                        final String sessionCode = map.get("SessionCode");
+                        final String type = map.get("Type");
                         dateTv.setText(date);
                         timeTv.setText(time);
                         locationTv.setText(location);
                         topicTv.setText(topic);
+
+                        bookBtn.setOnClickListener(new View.OnClickListener() {
+                            public static final String SESSIONDETAILS = "SessionDetails";
+
+                            @Override
+                            public void onClick(View v) {
+                                Log.d(SESSIONDETAILS, "onClick: bookBtn");
+                                mAuth = new FirebaseAuth.AuthStateListener() {
+                                    @Override
+                                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                                        if (user != null) {
+                                            // User is signed in
+                                            Firebase userBookingRef = new Firebase(getUser(user.getUid()));
+                                            Map<String, Object> bookingMap = new HashMap<String, Object>();
+                                            bookingMap.put("Date", date);
+                                            bookingMap.put("Time", time);
+                                            bookingMap.put("Location", location);
+                                            bookingMap.put("Topic", topic);
+                                            bookingMap.put("SessionCode", sessionCode);
+                                            bookingMap.put("Type", type);
+                                            userBookingRef.updateChildren(bookingMap);
+                                            userBookingRef.push();
+                                        }
+                                    }
+
+                                    private String getUser(String id) {
+                                        String userId = "https://utshelps-1574c.firebaseio.com/Users/" + id + "/Bookings";
+                                        return userId;
+                                    }
+                                };
+                            }
+                        });
                     }
 
                     @Override
@@ -149,149 +192,12 @@ public class SessionDetails extends AppCompatActivity {
                     }
 
                 });
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return rootView;
         }
     }
-
-    /*public static class PlaceholderFragmentTwo extends Fragment {
-        *//**
-     * The fragment argument representing the section number for this
-     * fragment.
-     *//*
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        private static int position;
-        private static String link;
-
-        public PlaceholderFragmentTwo() {
-        }
-
-        *//**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     *//*
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            position = sectionNumber;
-
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
-            TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
-            String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
-            titleTv.setText(titleString);
-
-            getArguments().getInt(ARG_SECTION_NUMBER);
-            final TextView dateTv = (TextView) rootView.findViewById(R.id.session_date);
-            final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
-            final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
-            final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
-
-            String linkTwo = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_TWO);
-            Firebase rootRef = new Firebase(linkTwo);
-            rootRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Map<String, String> map = dataSnapshot.getValue(Map.class);
-                    String date = map.get("Date");
-                    String time = map.get("Time");
-                    String location = map.get("Location");
-                    String topic = map.get("Topic");
-                    dateTv.setText(date);
-                    timeTv.setText(time);
-                    locationTv.setText(getArguments().getInt(ARG_SECTION_NUMBER));
-                    topicTv.setText(topic);
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-
-            return rootView;
-        }
-
-    }
-
-    public static class PlaceholderFragmentThree extends Fragment {
-        *//**
-     * The fragment argument representing the section number for this
-     * fragment.
-     *//*
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        private static int position;
-        private static String link;
-
-        public PlaceholderFragmentThree() {
-        }
-
-        *//**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     *//*
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            position = sectionNumber;
-
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
-            TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
-            String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
-            titleTv.setText(titleString);
-
-            final TextView dateTv = (TextView) rootView.findViewById(R.id.session_date);
-            final TextView timeTv = (TextView) rootView.findViewById(R.id.session_time);
-            final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
-            final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
-
-
-            String linkThree = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
-            Firebase rootRef = new Firebase(linkThree);
-            rootRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Map<String, String> map = dataSnapshot.getValue(Map.class);
-                    String date = map.get("Date");
-                    String time = map.get("Time");
-                    String location = map.get("Location");
-                    String topic = map.get("Topic");
-                    dateTv.setText(date);
-                    timeTv.setText(time);
-                    locationTv.setText(location);
-                    topicTv.setText(topic);
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-
-
-            return rootView;
-        }
-
-    }*/
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
