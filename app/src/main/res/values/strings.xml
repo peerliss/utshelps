@@ -96,4 +96,7 @@
     <string name="attendance_recorded">Attendance Recorded</string>
     <string name="submit">Submit</string>
     <string name="book_session">Book Session</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="registration">Registration</string>
+    <string name="register">Register</string>
 </resources>

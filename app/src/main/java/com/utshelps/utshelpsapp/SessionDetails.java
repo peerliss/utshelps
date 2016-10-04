@@ -122,7 +122,7 @@ public class SessionDetails extends AppCompatActivity {
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
             final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
 
-            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+            /*switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
                     link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
                     break;
@@ -132,7 +132,9 @@ public class SessionDetails extends AppCompatActivity {
                 case 3:
                     link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
                     break;
-            }
+            }*/
+
+            link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
 
             try {
                 final Firebase rootRef = new Firebase(link);
@@ -215,10 +217,11 @@ public class SessionDetails extends AppCompatActivity {
         @Override
         public int getCount() {
             // Amount of pages to be shown
-            if (getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE) != null) {
+            /*if (getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE) != null) {
                 return 3;
             } else
-                return 2;
+                return 2;*/
+            return 4;
         }
 
         /*@Override
