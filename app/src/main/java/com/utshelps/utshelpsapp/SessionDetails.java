@@ -1,8 +1,6 @@
 package com.utshelps.utshelpsapp;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -13,8 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -27,6 +23,10 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,12 +44,12 @@ public class SessionDetails extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     //    private Firebase rootRef;
     private FirebaseAuth mAuth;
+    private DatabaseReference dataRef;
 
 //    private TextView dateTv;
 //    private TextView timeTv;
 //    private TextView locationTv;
 //    private TextView topicTv;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -71,8 +71,10 @@ public class SessionDetails extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mAuth = FirebaseAuth.getInstance();
+        LinePageIndicator linePageIndicator = (LinePageIndicator) findViewById(R.id.session_swipingIndicator);
+        linePageIndicator.setViewPager(mViewPager);
 
+        mAuth = FirebaseAuth.getInstance();
     }
 
     /**
@@ -86,7 +88,6 @@ public class SessionDetails extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static int position;
         private FirebaseAuth.AuthStateListener mAuth;
-
 
         public PlaceholderFragment() {
         }
@@ -121,7 +122,6 @@ public class SessionDetails extends AppCompatActivity {
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
             final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
 
-
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
                     link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
@@ -135,7 +135,7 @@ public class SessionDetails extends AppCompatActivity {
             }
 
             try {
-                Firebase rootRef = new Firebase(link);
+                final Firebase rootRef = new Firebase(link);
 
                 rootRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -147,6 +147,10 @@ public class SessionDetails extends AppCompatActivity {
                         final String topic = map.get("Topic");
                         final String sessionCode = map.get("SessionCode");
                         final String type = map.get("Type");
+
+                        final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
+                        final int slot = mapInt.get("Slot");
+
                         dateTv.setText(date);
                         timeTv.setText(time);
                         locationTv.setText(location);
@@ -158,30 +162,22 @@ public class SessionDetails extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Log.d(SESSIONDETAILS, "onClick: bookBtn");
-                                mAuth = new FirebaseAuth.AuthStateListener() {
-                                    @Override
-                                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                                        FirebaseUser user = firebaseAuth.getCurrentUser();
-                                        if (user != null) {
-                                            // User is signed in
-                                            Firebase userBookingRef = new Firebase(getUser(user.getUid()));
-                                            Map<String, Object> bookingMap = new HashMap<String, Object>();
-                                            bookingMap.put("Date", date);
-                                            bookingMap.put("Time", time);
-                                            bookingMap.put("Location", location);
-                                            bookingMap.put("Topic", topic);
-                                            bookingMap.put("SessionCode", sessionCode);
-                                            bookingMap.put("Type", type);
-                                            userBookingRef.updateChildren(bookingMap);
-                                            userBookingRef.push();
-                                        }
-                                    }
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                String uid = user.getUid();
+                                if (slot > 0) {
+                                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
+                                    DatabaseReference newSession = dataRef.push();
+                                    newSession.child("Date").setValue(date);
+                                    newSession.child("Time").setValue(time);
+                                    newSession.child("Location").setValue(location);
+                                    newSession.child("Topic").setValue(topic);
+                                    newSession.child("SessionCode").setValue(sessionCode);
+                                    newSession.child("Type").setValue(type);
 
-                                    private String getUser(String id) {
-                                        String userId = "https://utshelps-1574c.firebaseio.com/Users/" + id + "/Bookings";
-                                        return userId;
-                                    }
-                                };
+                                    Map<String, Object> mapObject = new HashMap<>();
+                                    mapObject.put("Slot", slot - 1);
+                                    rootRef.updateChildren(mapObject);
+                                }
                             }
                         });
                     }
@@ -214,20 +210,11 @@ public class SessionDetails extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
-            /*switch (position) {
-                case 0:
-                    return PlaceholderFragment.newInstance(position + 1);
-                case 1:
-                    return PlaceholderFragmentTwo.newInstance(position + 1);
-                case 2:
-                    return PlaceholderFragmentThree.newInstance(position);
-            }
-            return null;*/
         }
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
+            // Amount of pages to be shown
             if (getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE) != null) {
                 return 3;
             } else
@@ -249,5 +236,10 @@ public class SessionDetails extends AppCompatActivity {
             }
             return null;
         }*/
+
+        public void createAssignment() {
+
+
+        }
     }
 }

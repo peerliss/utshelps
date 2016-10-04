@@ -33,4 +33,19 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.viewpagerindicator.LinePageIndicator
+            android:id="@+id/session_swipingIndicator"
+            android:layout_alignParentBottom="true"
+            app:lineWidth="30dp"
+            app:strokeWidth="3dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:fillColor="@color/black"/>
+    </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>
