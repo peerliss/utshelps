@@ -1,5 +1,6 @@
 package com.utshelps.utshelpsapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private EditText studentID;
     private EditText studentPassword;
     private Button loginBtn;
+    private Button registerBtn;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String check = "";
+    private Context context = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         studentID = (EditText) findViewById(R.id.student_id);
         studentPassword = (EditText) findViewById(R.id.student_password);
         loginBtn = (Button) findViewById(R.id.loginBtn);
+        registerBtn = (Button) findViewById(R.id.registerBtn);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -61,6 +65,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startSignIn();
+            }
+        });
+
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = studentID.getText().toString() + "@uts.edu.au";
+                String password = studentPassword.getText().toString();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Please enter your student ID!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Please enter your password!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (password.length() < 6) {
+                    Toast.makeText(getApplicationContext(), "Your password is too short, enter minimum 6 characters!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(context, "Signing up...", Toast.LENGTH_LONG).show();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(context, "Authentication failed." + task.getException(), Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            startActivity(new Intent(context, RegisterActivity.class));
+                            finish();
+                        }
+                    }
+                });
+
             }
         });
     }
