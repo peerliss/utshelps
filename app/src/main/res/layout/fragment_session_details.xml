@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.utshelps.utshelpsapp.SessionDetails$PlaceholderFragment">
+    tools:context="com.utshelps.utshelpsapp.SessionDetails$PlaceholderFragment" >
 
     <TextView
         android:id="@+id/session_title"
@@ -147,9 +147,10 @@
         android:id="@+id/session_bookBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/session_infoLayout"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:layout_marginBottom="22.5dp"
         android:background="@color/blueButton"
         android:padding="15dp"
         android:text="@string/book_session"
