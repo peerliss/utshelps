@@ -9,17 +9,17 @@ public class Session {
     String Time;
     String Slot;
     String Topic;
-//    String attendanceRecorded;
+    String attendanceRecorded;
 
 
-    public Session(String availability, String date, String location, String sessionCode, String time, String topic/*, String attendanceRecorded*/) {
+    public Session(String availability, String date, String location, String sessionCode, String time, String topic, String attendanceRecorded) {
         this.Availability = availability;
         this.Date = date;
         this.Location = location;
         this.SessionCode = sessionCode;
         this.Time = time;
         this.Topic = topic;
-//        this.attendanceRecorded = attendanceRecorded;
+        this.attendanceRecorded = attendanceRecorded;
     }
 
     public Session() {
@@ -82,11 +82,11 @@ public class Session {
         Topic = topic;
     }
 
-    /*public String getAttendanceRecorded() {
+    public String getAttendanceRecorded() {
         return attendanceRecorded;
     }
 
     public void setAttendanceRecorded(String attendanceRecorded) {
         this.attendanceRecorded = attendanceRecorded;
-    }*/
+    }
 }
