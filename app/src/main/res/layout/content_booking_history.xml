@@ -14,11 +14,16 @@
     tools:context="com.utshelps.utshelpsapp.BookingHistoryActivity"
     tools:showIn="@layout/activity_booking_history">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/bookingHistory_recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/bookingHistory_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+        </android.support.v7.widget.RecyclerView>
+
+    </ScrollView>
 </LinearLayout>
