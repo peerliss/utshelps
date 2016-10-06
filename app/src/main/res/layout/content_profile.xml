@@ -74,17 +74,17 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/profileEmailTitle"
+                android:id="@+id/profileIdTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/email"
+                android:text="@string/student_id"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/profileEmail"
+                android:id="@+id/profileId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

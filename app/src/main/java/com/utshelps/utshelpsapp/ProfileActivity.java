@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
     private EditText profileName;
-    private EditText profileEmail;
+    private EditText profileId;
     private EditText profileAddress;
     private EditText profileDOB;
     String link = "";
@@ -53,8 +53,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileName = (EditText) findViewById(R.id.profileName);
         profileName.setEnabled(false);
-        profileEmail = (EditText) findViewById(R.id.profileEmail);
-        profileEmail.setEnabled(false);
+        profileId = (EditText) findViewById(R.id.profileId);
+        profileId.setEnabled(false);
         profileAddress = (EditText) findViewById(R.id.profileAddress);
         profileAddress.setEnabled(false);
         profileDOB = (EditText) findViewById(R.id.profileDOB);
@@ -74,13 +74,13 @@ public class ProfileActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Map<String, String> map = dataSnapshot.getValue(Map.class);
                             String name = map.get("Name");
-                            String email = map.get("Email");
+                            String id = map.get("Email").substring(0, map.get("Email").indexOf("@"));
                             String address = map.get("Address");
                             String dob = map.get("DOB");
                             profileName.setText(name);
                             profileDOB.setText(dob);
                             profileAddress.setText(address);
-                            profileEmail.setText(email);
+                            profileId.setText(id);
                         }
 
                         @Override
@@ -122,7 +122,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void editProfile() {
         profileName.setEnabled(true);
-        profileEmail.setEnabled(true);
+        profileId.setEnabled(true);
         profileAddress.setEnabled(true);
         profileDOB.setEnabled(true);
         editProfile_button.setVisibility(View.GONE);
@@ -131,7 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void submitProfile() {
         profileName.setEnabled(false);
-        profileEmail.setEnabled(false);
+        profileId.setEnabled(false);
         profileAddress.setEnabled(false);
         profileDOB.setEnabled(false);
         editProfile_button.setVisibility(View.VISIBLE);
@@ -139,7 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
         Map<String, Object> taskMap = new HashMap<String, Object>();
         taskMap.put("Name", profileName.getText().toString());
         taskMap.put("Address", profileAddress.getText().toString());
-        taskMap.put("Email", profileEmail.getText().toString());
+        taskMap.put("Email", profileId.getText().toString());
         taskMap.put("DOB", profileDOB.getText().toString());
         rootRef.updateChildren(taskMap);
     }

@@ -57,20 +57,19 @@ public class MyBookingActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Session,BookingViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Session, BookingViewHolder>(
+        FirebaseRecyclerAdapter<Session, BookingViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Session, BookingViewHolder>(
                 Session.class,
                 R.layout.my_booking_item,
                 BookingViewHolder.class,
                 mDatabase
-        )
-        {
+        ) {
             @Override
             protected void populateViewHolder(BookingViewHolder viewHolder, Session model, int position) {
-                boolean check = checkDate(model.getDate());
-                if(check) {
+//                boolean check = checkDate(model.getDate());
+                boolean check = true;
+                if (check) {
                     viewHolder.setDate(model.getDate());
                     viewHolder.setLocation(model.getLocation());
                     viewHolder.setTime(model.getTime());
@@ -110,9 +109,7 @@ public class MyBookingActivity extends AppCompatActivity {
                             alertDialog.show();
                         }
                     });
-                }
-                else
-                {
+                } else {
                     viewHolder.deleteLayout();
                 }
             }
@@ -132,60 +129,48 @@ public class MyBookingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private boolean checkDate(String date)
-    {
-        try
-        {
-            if (new SimpleDateFormat("dd/MM/yyyy").parse(date).after(new Date()))
-            {
+    /*private boolean checkDate(String date) {
+        try {
+            if (new SimpleDateFormat("dd/MM/yyyy").parse(date).after(new Date())) {
                 return true;
             }
-        }
-        catch (java.text.ParseException e)
-        {
+        } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
 
-    public static class BookingViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class BookingViewHolder extends RecyclerView.ViewHolder {
         View mView;
         Button myBooking_cancelBtn;
         Button viewBooking;
 
-        public BookingViewHolder(View itemView)
-        {
+        public BookingViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }
 
-        public void setDate(String date)
-        {
+        public void setDate(String date) {
             TextView bookingDate = (TextView) mView.findViewById(R.id.myBooking_date);
             bookingDate.setText(date);
         }
 
-        public void setTime(String time)
-        {
+        public void setTime(String time) {
             TextView bookingTime = (TextView) mView.findViewById(R.id.myBooking_time);
             bookingTime.setText(time);
         }
 
-        public void setLocation(String location)
-        {
+        public void setLocation(String location) {
             TextView bookingLocation = (TextView) mView.findViewById(R.id.myBooking_building);
             bookingLocation.setText(location);
         }
 
-        public void setBtn()
-        {
+        public void setBtn() {
             viewBooking = (Button) mView.findViewById(R.id.myBooking_viewBtn);
             myBooking_cancelBtn = (Button) mView.findViewById(R.id.myBooking_cancelBtn);
         }
 
-        public void deleteLayout()
-        {
+        public void deleteLayout() {
 //            View deleteView = mView.findViewById(R.id.myBooking_recyclerView);
             View deleteView = mView.findViewById(R.id.deleteView);
             deleteView.setVisibility(View.GONE);

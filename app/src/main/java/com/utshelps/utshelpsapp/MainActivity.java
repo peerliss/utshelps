@@ -91,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(context, "Signing up...", Toast.LENGTH_LONG).show();
                         if (!task.isSuccessful()) {
-                            Toast.makeText(context, "Authentication failed." + task.getException(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "The user ID is already registered", Toast.LENGTH_LONG).show();
                         }
                         else {
+                            Toast.makeText(context, "Signing up...", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(context, RegisterActivity.class));
                             finish();
                         }
@@ -139,7 +139,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSignIn() {
-        String email = studentID.getText().toString();
+        String email;
+        if (studentID.getText().toString().contains("@")) {
+            email = studentID.getText().toString();
+        }
+        else {
+            email = studentID.getText().toString() + "@uts.edu.au";
+        }
         String password = studentPassword.getText().toString();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
@@ -149,8 +155,11 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show();
                         checkRegistration();
                     }
+                    else
+                        Toast.makeText(context, "ID or password is incorrect", Toast.LENGTH_LONG).show();
                 }
             });
         }
