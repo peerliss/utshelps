@@ -7,16 +7,17 @@ public class Session {
     String Location;
     String SessionCode;
     String Time;
-    String Slot;
+    int Slot;
     String Topic;
     String attendanceRecorded;
 
 
-    public Session(String availability, String date, String location, String sessionCode, String time, String topic, String attendanceRecorded) {
+    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded) {
         this.Availability = availability;
         this.Date = date;
         this.Location = location;
         this.SessionCode = sessionCode;
+        this.Slot = slot;
         this.Time = time;
         this.Topic = topic;
         this.attendanceRecorded = attendanceRecorded;
@@ -58,6 +59,14 @@ public class Session {
         SessionCode = sessionCode;
     }
 
+    public int getSlot() {
+        return Slot;
+    }
+
+    public void setSlot(int slot) {
+        Slot = slot;
+    }
+
     public String getTime() {
         return Time;
     }
@@ -66,13 +75,6 @@ public class Session {
         Time = time;
     }
 
-    public String getSlot() {
-        return Slot;
-    }
-
-    public void setSlot(String slot) {
-        Slot = slot;
-    }
 
     public String getTopic() {
         return Topic;
