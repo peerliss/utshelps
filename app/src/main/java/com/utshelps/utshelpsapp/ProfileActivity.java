@@ -61,39 +61,35 @@ public class ProfileActivity extends AppCompatActivity {
         profileDOB.setEnabled(false);
         editProfile_button = (Button) findViewById(R.id.editProfile_button);
         submitButton = (Button) findViewById(R.id.submitButton);
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        link = getUser(user.getUid());
+        rootRef = new Firebase(link);
+        rootRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    link = getUser(user.getUid());
-                    rootRef = new Firebase(link);
-                    rootRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Map<String, String> map = dataSnapshot.getValue(Map.class);
-                            String name = map.get("Name");
-                            String id = map.get("Email")/*.substring(0, map.get("Email").indexOf("@"))*/;
-                            String address = map.get("Address");
-                            String dob = map.get("DOB");
-                            profileName.setText(name);
-                            profileDOB.setText(dob);
-                            profileAddress.setText(address);
-                            profileId.setText(id);
-                        }
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                try{
+                    Map<String, String> map = dataSnapshot.getValue(Map.class);
+                    String name = map.get("Name");
+                    String id = map.get("Email")/*.substring(0, map.get("Email").indexOf("@"))*/;
+                    String address = map.get("Address");
+                    String dob = map.get("DOB");
+                    profileName.setText(name);
+                    profileDOB.setText(dob);
+                    profileAddress.setText(address);
+                    profileId.setText(id);
+                }
+                catch (Exception e)
+                {
 
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-
-                        }
-
-                    });
-                } else {
-                    startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                 }
             }
-        };
+            @Override
+            public void onCancelled(FirebaseError firebaseError)
+            {
+            }
+
+        });
         editProfile_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +108,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
     }
 
     private String getUser(String id) {

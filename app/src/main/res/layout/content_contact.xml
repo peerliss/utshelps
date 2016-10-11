@@ -84,17 +84,4 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/contact_chatBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@color/blueButton"
-        android:paddingEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingStart="20dp"
-        android:text="@string/online_chat"
-        android:textColor="@color/white" />
-
 </LinearLayout>

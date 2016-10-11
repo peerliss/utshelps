@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,7 +82,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                                 builder.setView(promptView);
                                 attendanceText = (EditText) promptView.findViewById(R.id.attendance_input);
 
-                                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Toast.makeText(getApplicationContext(), "Please record attendance", Toast.LENGTH_LONG).show();
@@ -88,7 +90,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                                 });
                                 builder.setCancelable(true);
 
-                                builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         String aText = attendanceText.getText().toString();
@@ -137,6 +139,8 @@ public class BookingDetailActivity extends AppCompatActivity {
                 reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 reminderSpinner.setAdapter(reminderAdapter);
 
+                reminderSpinner.setSelection(1);
+
                 alertDialogBuilder.setTitle("Do you want to get informed by Email or SMS?");
 
                 reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -155,24 +159,37 @@ public class BookingDetailActivity extends AppCompatActivity {
                     }
                 });
 
-//                alertDialogBuilder.setView(reminderView);
+                RadioGroup reminderTypeGroup = (RadioGroup) reminderView.findViewById(R.id.reminder_radioGroup);
+                int selectedId = reminderTypeGroup.getCheckedRadioButtonId();
+                final RadioButton radioButton = (RadioButton) reminderView.findViewById(selectedId);
+                final String selectedRadioButton = "";
+
+                final RadioButton emailRadioBtn = (RadioButton) reminderView.findViewById(R.id.reminder_emailRadioBtn);
+                final RadioButton smsRadioBtn = (RadioButton) reminderView.findViewById(R.id.reminder_smsRadioBtn);
+
+                emailRadioBtn.setChecked(true);
 
                 alertDialogBuilder.setCancelable(true);
                 alertDialogBuilder.setView(reminderView).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Map<String, Object> taskMap = new HashMap<String, Object>();
-                        taskMap.put("reminderType", "SMS");
-                        fRoot.updateChildren(taskMap);
-                        Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
+
                     }
                 }).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Map<String, Object> taskMap = new HashMap<String, Object>();
-                        taskMap.put("reminderType", "email");
-                        fRoot.updateChildren(taskMap);
-                        Toast.makeText(getApplicationContext(), "You will be reminded via Email", Toast.LENGTH_LONG).show();
+                        if (smsRadioBtn.isChecked()) {
+                            Map<String, Object> taskMap = new HashMap<String, Object>();
+                            taskMap.put("reminderType", "sms");
+                            fRoot.updateChildren(taskMap);
+                            Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
+                        }
+                        else if (emailRadioBtn.isChecked()) {
+                            Map<String, Object> taskMap = new HashMap<String, Object>();
+                            taskMap.put("reminderType", "email");
+                            fRoot.updateChildren(taskMap);
+                            Toast.makeText(getApplicationContext(), "You will be reminded via Email", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
                 AlertDialog alertDialog = alertDialogBuilder.create();

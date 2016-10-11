@@ -27,8 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:id="@+id/reminder_radioGroup"
             android:padding="10dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal" >
 
             <RadioButton
                 android:id="@+id/reminder_emailRadioBtn"

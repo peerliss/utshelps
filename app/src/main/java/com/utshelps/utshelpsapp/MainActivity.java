@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
-                    login();
+                    checkRegistration();
+//                    login();
                 }
             }
         };
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(context, /*R.string.id_already_registered*/task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.id_already_registered, Toast.LENGTH_LONG).show();
                         }
                         else {
                             Toast.makeText(context, R.string.registration_successful, Toast.LENGTH_LONG).show();

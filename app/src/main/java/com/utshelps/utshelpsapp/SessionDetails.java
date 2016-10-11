@@ -207,6 +207,8 @@ public class SessionDetails extends AppCompatActivity {
                                     reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     reminderSpinner.setAdapter(reminderAdapter);
 
+                                    reminderSpinner.setSelection(1);
+
                                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
