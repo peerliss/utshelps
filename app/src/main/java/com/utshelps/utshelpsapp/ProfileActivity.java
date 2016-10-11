@@ -61,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         profileDOB.setEnabled(false);
         editProfile_button = (Button) findViewById(R.id.editProfile_button);
         submitButton = (Button) findViewById(R.id.submitButton);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         link = getUser(user.getUid());
         rootRef = new Firebase(link);
