@@ -173,7 +173,9 @@ public class MyBookingActivity extends AppCompatActivity {
         public void deleteLayout() {
 //            View deleteView = mView.findViewById(R.id.myBooking_recyclerView);
             View deleteView = mView.findViewById(R.id.deleteView);
+            View deleteLine = mView.findViewById(R.id.line4);
             deleteView.setVisibility(View.GONE);
+            deleteLine.setVisibility(View.GONE);
         }
 
     }

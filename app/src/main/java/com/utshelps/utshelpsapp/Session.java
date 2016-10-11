@@ -21,8 +21,9 @@ public class Session {
     private String Topic;
     private String attendanceRecorded;
     private String Type;
+    private String reminderType;
 
-    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded, String type) {
+    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded, String type, String reminderType) {
         this.Availability = availability;
         this.Location = location;
         this.SessionCode = sessionCode;
@@ -32,6 +33,8 @@ public class Session {
         this.Topic = topic;
         this.attendanceRecorded = attendanceRecorded;
         this.Type = type;
+        this.reminderType = reminderType;
+
     }
 
     public Session() {
@@ -46,6 +49,14 @@ public class Session {
         Availability = availability;
     }
 
+
+    public String getReminderType() {
+        return reminderType;
+    }
+
+    public void setReminderType(String reminderType) {
+        this.reminderType = reminderType;
+    }
 
     public String getLocation() {
         return Location;

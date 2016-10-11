@@ -67,7 +67,7 @@ public class BookingDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> map = dataSnapshot.getValue(Map.class);
                 getData(map);
-                if (checkAttendance.equals("no")) {
+                if (checkAttendance.equals("false")) {
                     attendanceBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -131,9 +131,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                 reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 reminderSpinner.setAdapter(reminderAdapter);
 
-
                 alertDialogBuilder.setTitle("Do you want to get informed by Email or SMS?");
-
 
                 reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -151,7 +149,7 @@ public class BookingDetailActivity extends AppCompatActivity {
 //                alertDialogBuilder.setView(reminderView);
 
                 alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.setView(reminderView).setPositiveButton("SMS", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setView(reminderView).setNegativeButton("SMS", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();
@@ -159,7 +157,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                         fRoot.updateChildren(taskMap);
                         Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
                     }
-                }).setNegativeButton("Email", new DialogInterface.OnClickListener() {
+                }).setPositiveButton("Email", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();

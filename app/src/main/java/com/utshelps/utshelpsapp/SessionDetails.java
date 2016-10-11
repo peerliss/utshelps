@@ -202,7 +202,7 @@ public class SessionDetails extends AppCompatActivity {
                                     reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     reminderSpinner.setAdapter(reminderAdapter);
 
-                                    builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -210,22 +210,22 @@ public class SessionDetails extends AppCompatActivity {
                                     });
                                     builder.setCancelable(true);
 
-                                    builder.setNegativeButton(R.string.confirm_alert, new DialogInterface.OnClickListener() {
+                                    builder.setPositiveButton(R.string.confirm_alert, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
-//                                    DatabaseReference newSession = dataRef.child(bookKey);
-                                            DatabaseReference newSession = dataRef.push();
+                                            DatabaseReference newSession = dataRef.child(bookKey);
+//                                            DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
                                             newSession.child("Topic").setValue(topic);
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
-//                                    newSession.child("attendanceRecorded").setValue("false");
-//                                    newSession.child("reminderTime").setValue("11");
-//                                    newSession.child("reminderDate").setValue("12/10/2016");
-//                                    newSession.child("reminderType").setValue("email");
+                                            newSession.child("attendanceRecorded").setValue("false");
+                                            newSession.child("reminderTime").setValue("11");
+                                            newSession.child("reminderDate").setValue("12/10/2016");
+                                            newSession.child("reminderType").setValue("email");
 
                                             Map<String, Object> mapObject = new HashMap<>();
                                             mapObject.put("Slot", slot - 1);
@@ -257,22 +257,18 @@ public class SessionDetails extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Waitlist");
-//                                    DatabaseReference newSession = dataRef.child(bookKey);
-                                            DatabaseReference newSession = dataRef.push();
+                                            DatabaseReference newSession = dataRef.child(bookKey);
+//                                          DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
                                             newSession.child("Topic").setValue(topic);
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
-//                                    newSession.child("attendanceRecorded").setValue("false");
-//                                    newSession.child("reminderTime").setValue("11");
-//                                    newSession.child("reminderDate").setValue("12/10/2016");
-//                                    newSession.child("reminderType").setValue("email");
-
-                                            /*Map<String, Object> mapObject = new HashMap<>();
-                                            mapObject.put("Slot", slot - 1);
-                                            rootRef.updateChildren(mapObject);*/
+//                                          newSession.child("attendanceRecorded").setValue("false");
+//                                          newSession.child("reminderTime").setValue("11");
+//                                          newSession.child("reminderDate").setValue("12/10/2016");
+//                                          newSession.child("reminderType").setValue("email");
 
                                             Toast.makeText(getContext(), R.string.added_to_waitlist, Toast.LENGTH_LONG).show();
                                         }

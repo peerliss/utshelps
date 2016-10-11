@@ -143,8 +143,8 @@
         <item>PM</item>
     </string-array>
     <string-array name="reminder">
-        <item>30 minutes prior booking</item>
-        <item>1 day prior booking</item>
-        <item>7 days prior booking</item>
+        <item>30 minutes prior session</item>
+        <item>1 day prior session</item>
+        <item>7 days prior session</item>
     </string-array>
 </resources>

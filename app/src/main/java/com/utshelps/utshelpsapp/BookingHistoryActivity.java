@@ -161,7 +161,9 @@ public class BookingHistoryActivity extends AppCompatActivity
         public void deleteLayout()
         {
             View historyView = mView.findViewById(R.id.deleteView);
+            View line = mView.findViewById(R.id.line4);
             historyView.setVisibility(View.GONE);
+            line.setVisibility(View.GONE);
         }
 
     }
