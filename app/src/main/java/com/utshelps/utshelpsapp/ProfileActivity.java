@@ -74,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Map<String, String> map = dataSnapshot.getValue(Map.class);
                             String name = map.get("Name");
-                            String id = map.get("Email").substring(0, map.get("Email").indexOf("@"));
+                            String id = map.get("Email")/*.substring(0, map.get("Email").indexOf("@"))*/;
                             String address = map.get("Address");
                             String dob = map.get("DOB");
                             profileName.setText(name);
