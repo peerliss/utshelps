@@ -85,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void startSignOut() {
         mAuth.signOut();
+        Toast.makeText(HomeActivity.this, "You have logged out.", Toast.LENGTH_LONG).show();
     }
 
     public void myProfile(View view) {

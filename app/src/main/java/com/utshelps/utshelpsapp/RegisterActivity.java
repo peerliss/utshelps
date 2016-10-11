@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity
         String status = radioStatusButton.getText().toString();
         if (TextUtils.isEmpty(contact) || TextUtils.isEmpty(language) || TextUtils.isEmpty(country))
         {
-            Toast.makeText(RegisterActivity.this, "Please enter all details!", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, R.string.enter_all_details, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -109,6 +109,8 @@ public class RegisterActivity extends AppCompatActivity
         dataRef.child("studyYear").setValue(year);
         dataRef.child("degree").setValue(degree);
         dataRef.child("status").setValue(status);
+
+        Toast.makeText(RegisterActivity.this, "Details successfully added", Toast.LENGTH_LONG).show();
     }
 
     public void onRadioButtonClicked(View view) {

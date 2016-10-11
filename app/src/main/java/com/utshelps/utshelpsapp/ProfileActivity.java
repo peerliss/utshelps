@@ -142,6 +142,7 @@ public class ProfileActivity extends AppCompatActivity {
         taskMap.put("Email", profileId.getText().toString());
         taskMap.put("DOB", profileDOB.getText().toString());
         rootRef.updateChildren(taskMap);
+        Toast.makeText(ProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
     }
 
     /*@Override

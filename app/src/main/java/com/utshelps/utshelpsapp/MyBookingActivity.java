@@ -45,7 +45,7 @@ public class MyBookingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView = (RecyclerView) findViewById(R.id.myBooking_recyclerView);
-        mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,8 +67,8 @@ public class MyBookingActivity extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(BookingViewHolder viewHolder, Session model, int position) {
-//                boolean check = checkDate(model.getDate());
-                boolean check = true;
+                boolean check = checkDate(model.getDate());
+
                 if (check) {
                     viewHolder.setDate(model.getDate());
                     viewHolder.setLocation(model.getLocation());
@@ -129,7 +129,7 @@ public class MyBookingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*private boolean checkDate(String date) {
+    private boolean checkDate(String date) {
         try {
             if (new SimpleDateFormat("dd/MM/yyyy").parse(date).after(new Date())) {
                 return true;
@@ -138,7 +138,7 @@ public class MyBookingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return false;
-    }*/
+    }
 
     public static class BookingViewHolder extends RecyclerView.ViewHolder {
         View mView;

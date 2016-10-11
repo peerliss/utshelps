@@ -46,7 +46,7 @@ public class BookingHistoryActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView = (RecyclerView) findViewById(R.id.bookingHistory_recyclerView);
-        mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -81,7 +81,7 @@ public class BookingHistoryActivity extends AppCompatActivity
                     viewHolder.setDate(model.getDate());
                     viewHolder.setLocation(model.getLocation());
                     viewHolder.setTime(model.getTime());
-//                    viewHolder.setBtn();
+                    viewHolder.setBtn();
                 }
                 else
                 {
@@ -150,17 +150,17 @@ public class BookingHistoryActivity extends AppCompatActivity
             bookingLocation.setText(location);
         }
 
-        /*public void setBtn()
+        public void setBtn()
         {
             myBooking_cancelBtn = (Button) mView.findViewById(R.id.myBooking_cancelBtn);
-            viewBooking = (Button) mView.findViewById(R.id.viewBookingBtn);
+            viewBooking = (Button) mView.findViewById(R.id.myBooking_viewBtn);
             myBooking_cancelBtn.setVisibility(View.GONE);
             viewBooking.setVisibility(View.GONE);
-        }*/
+        }
 
         public void deleteLayout()
         {
-            View historyView = mView.findViewById(R.id.myBooking_recyclerView);
+            View historyView = mView.findViewById(R.id.deleteView);
             historyView.setVisibility(View.GONE);
         }
 

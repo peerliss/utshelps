@@ -1,6 +1,8 @@
 package com.utshelps.utshelpsapp;
 
+import android.content.DialogInterface;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -14,8 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -107,9 +113,9 @@ public class SessionDetails extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
+            final View rootView = inflater.inflate(R.layout.fragment_session_details, container, false);
             TextView titleTv = (TextView) rootView.findViewById(R.id.session_title);
             String titleString = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.TITLE);
             titleTv.setText(titleString);
@@ -121,6 +127,21 @@ public class SessionDetails extends AppCompatActivity {
             final TextView locationTv = (TextView) rootView.findViewById(R.id.session_location);
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
             final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
+
+            /*try {
+                Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.reminder_timeSpinner);
+                ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.time, android.R.layout.simple_spinner_item);
+                timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                timeSpinner.setAdapter(timeAdapter);
+
+                Spinner ampmSpinner = (Spinner) rootView.findViewById(R.id.reminder_ampmSpinner);
+                ArrayAdapter<CharSequence> ampmAdapter = ArrayAdapter.createFromResource(getContext(), R.array.ampm, android.R.layout.simple_spinner_item);
+                ampmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ampmSpinner.setAdapter(ampmAdapter);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }*/
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
@@ -147,7 +168,8 @@ public class SessionDetails extends AppCompatActivity {
                         final String topic = map.get("Topic");
                         final String sessionCode = map.get("SessionCode");
                         final String type = map.get("Type");
-
+                        final String bookKey = dataSnapshot.getKey();
+                        Log.v("key", bookKey);
                         final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
                         final int slot = mapInt.get("Slot");
 
@@ -163,20 +185,68 @@ public class SessionDetails extends AppCompatActivity {
                             public void onClick(View v) {
                                 Log.d(SESSIONDETAILS, "onClick: bookBtn");
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                String uid = user.getUid();
+                                final String uid = user.getUid();
                                 if (slot > 0) {
-                                    DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
-                                    DatabaseReference newSession = dataRef.push();
-                                    newSession.child("Date").setValue(date);
-                                    newSession.child("Time").setValue(time);
-                                    newSession.child("Location").setValue(location);
-                                    newSession.child("Topic").setValue(topic);
-                                    newSession.child("SessionCode").setValue(sessionCode);
-                                    newSession.child("Type").setValue(type);
+                                    final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    builder.setTitle(R.string.confirm);
+                                    builder.setMessage(R.string.when_reminded);
 
-                                    Map<String, Object> mapObject = new HashMap<>();
-                                    mapObject.put("Slot", slot - 1);
-                                    rootRef.updateChildren(mapObject);
+                                    LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                                    View promptView = layoutInflater.inflate(R.layout.reminder, null);
+
+                                    /*Spinner timeSpinner = (Spinner) promptView.findViewById(R.id.reminder_timeSpinner);
+                                    ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.time, android.R.layout.simple_spinner_item);
+                                    timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    timeSpinner.setAdapter(timeAdapter);
+
+                                    Spinner ampmSpinner = (Spinner) promptView.findViewById(R.id.reminder_ampmSpinner);
+                                    ArrayAdapter<CharSequence> ampmAdapter = ArrayAdapter.createFromResource(getContext(), R.array.ampm, android.R.layout.simple_spinner_item);
+                                    ampmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    ampmSpinner.setAdapter(ampmAdapter);*/
+
+//                                    EditText dateEt = (EditText) promptView.findViewById(R.id.reminder_dateTxt);
+//                                    String dateString = dateEt.getText().toString();
+//                                    timeSpinner.setSelection(0);
+//                                    ampmSpinner.setSelection(0);
+
+                                    builder.setView(promptView);
+
+                                    builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        }
+                                    });
+                                    builder.setCancelable(true);
+
+                                    builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
+//                                    DatabaseReference newSession = dataRef.child(bookKey);
+                                            DatabaseReference newSession = dataRef.push();
+                                            newSession.child("Date").setValue(date);
+                                            newSession.child("Time").setValue(time);
+                                            newSession.child("Location").setValue(location);
+                                            newSession.child("Topic").setValue(topic);
+                                            newSession.child("SessionCode").setValue(sessionCode);
+                                            newSession.child("Type").setValue(type);
+//                                    newSession.child("attendanceRecorded").setValue("false");
+//                                    newSession.child("reminderTime").setValue("11");
+//                                    newSession.child("reminderDate").setValue("12/10/2016");
+//                                    newSession.child("reminderType").setValue("email");
+
+                                            Map<String, Object> mapObject = new HashMap<>();
+                                            mapObject.put("Slot", slot - 1);
+                                            rootRef.updateChildren(mapObject);
+
+                                            Toast.makeText(getContext(), "Booking successful", Toast.LENGTH_LONG).show();
+                                        }
+
+
+                                    });
+//                                    builder.create();
+                                    builder.show();
                                 }
                             }
                         });

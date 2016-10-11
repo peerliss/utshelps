@@ -1,26 +1,37 @@
 package com.utshelps.utshelpsapp;
 
+
 public class Session {
 
-    String Availability;
-    String Date;
-    String Location;
-    String SessionCode;
-    String Time;
-    int Slot;
-    String Topic;
-    String attendanceRecorded;
+    private String Availability;
 
+    public String getDate() {
+        return Date;
+    }
 
-    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded) {
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    private String Location;
+    private String SessionCode;
+    private String Time;
+    private String Date;
+    private int Slot;
+    private String Topic;
+    private String attendanceRecorded;
+    private String Type;
+
+    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded, String type) {
         this.Availability = availability;
-        this.Date = date;
         this.Location = location;
         this.SessionCode = sessionCode;
         this.Slot = slot;
         this.Time = time;
+        this.Date = date;
         this.Topic = topic;
         this.attendanceRecorded = attendanceRecorded;
+        this.Type = type;
     }
 
     public Session() {
@@ -35,13 +46,6 @@ public class Session {
         Availability = availability;
     }
 
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
 
     public String getLocation() {
         return Location;
@@ -90,5 +94,13 @@ public class Session {
 
     public void setAttendanceRecorded(String attendanceRecorded) {
         this.attendanceRecorded = attendanceRecorded;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
     }
 }

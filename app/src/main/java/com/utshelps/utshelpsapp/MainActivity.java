@@ -71,31 +71,31 @@ public class MainActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = studentID.getText().toString() + "@uts.edu.au";
+                String email = studentID.getText().toString() + R.string.uts_email;
                 String password = studentPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Please enter your student ID!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.enter_id, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Please enter your password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.enter_password, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Your password is too short, enter minimum 6 characters!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_LONG).show();
                     return;
                 }
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(context, "The user ID is already registered", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.id_already_registered, Toast.LENGTH_LONG).show();
                         }
                         else {
-                            Toast.makeText(context, "Signing up...", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, R.string.registration_successful, Toast.LENGTH_LONG).show();
                             startActivity(new Intent(context, RegisterActivity.class));
                             finish();
                         }
@@ -144,22 +144,22 @@ public class MainActivity extends AppCompatActivity {
             email = studentID.getText().toString();
         }
         else {
-            email = studentID.getText().toString() + "@uts.edu.au";
+            email = studentID.getText().toString() + getString(R.string.uts_email);
         }
         String password = studentPassword.getText().toString();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(MainActivity.this, "Please enter ID or password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.enter_id_or_password, Toast.LENGTH_SHORT).show();
         } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(context, "Signing in...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.login_successful, Toast.LENGTH_SHORT).show();
                         checkRegistration();
                     }
                     else
-                        Toast.makeText(context, "ID or password is incorrect", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.incorrect_password, Toast.LENGTH_LONG).show();
                 }
             });
         }

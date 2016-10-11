@@ -100,4 +100,41 @@
     <string name="registration">Registration</string>
     <string name="register">Register</string>
     <string name="workshop">Workshop</string>
+    <string name="login_successful">Login successful</string>
+    <string name="incorrect_password">ID or password is incorrect</string>
+    <string name="enter_id_or_password">Please enter ID or password</string>
+    <string name="uts_email">\@uts.edu.au</string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="id_already_registered">The user ID is already registered</string>
+    <string name="password_short">Your password is too short, enter minimum 6 characters!</string>
+    <string name="enter_password">Please enter your password!</string>
+    <string name="enter_id">Please enter your student ID!</string>
+    <string name="enter_all_details">Please enter all details!</string>
+    <string name="booking_confirmation_message">Are you sure you want to book this session?</string>
+    <string name="confirm">Confirm</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="when_reminded">When would you like to be reminded?</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="select_a_time">Select a time</string>
+    <string name="done">Done</string>
+    <string-array name="time">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="ampm">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
 </resources>
