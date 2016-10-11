@@ -57,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity
         radioDegreeGroup = (RadioGroup) findViewById(R.id.radioDegreeGroup);
         radioStatusGroup = (RadioGroup) findViewById(R.id.radioStatusGroup);
         mAuth = FirebaseAuth.getInstance();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -97,6 +98,15 @@ public class RegisterActivity extends AppCompatActivity
         radioStatusButton = (RadioButton) findViewById(selectedStatus);
         String degree = radioDegreeButton.getText().toString();
         String status = radioStatusButton.getText().toString();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String email = "";
+        try {
+            email = user.getEmail().substring(0, user.getEmail().indexOf("@"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (TextUtils.isEmpty(contact) || TextUtils.isEmpty(language) || TextUtils.isEmpty(country))
         {
             Toast.makeText(RegisterActivity.this, R.string.enter_all_details, Toast.LENGTH_LONG).show();
@@ -109,11 +119,12 @@ public class RegisterActivity extends AppCompatActivity
         dataRef.child("studyYear").setValue(year);
         dataRef.child("degree").setValue(degree);
         dataRef.child("status").setValue(status);
+        dataRef.child("Email").setValue(email);
 
         Toast.makeText(RegisterActivity.this, "Details successfully added", Toast.LENGTH_LONG).show();
     }
 
     public void onRadioButtonClicked(View view) {
-        
+
     }
 }
