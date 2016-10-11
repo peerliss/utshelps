@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -196,6 +197,10 @@ public class SessionDetails extends AppCompatActivity {
 
                                     builder.setView(promptView);
 
+                                    RadioButton emailRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_emailRadioBtn);
+                                    RadioButton smsRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_smsRadioBtn);
+
+                                    emailRadioBtn.setChecked(true);
 
                                     Spinner reminderSpinner = (Spinner) promptView.findViewById(R.id.reminder_spinner);
                                     ArrayAdapter<CharSequence> reminderAdapter = ArrayAdapter.createFromResource(getContext(), R.array.reminder, android.R.layout.simple_spinner_item);

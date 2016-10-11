@@ -3,10 +3,48 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/reminder_spinner"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/reminder_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/how_would_you_like_to_be_reminded"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <RadioButton
+                android:id="@+id/reminder_emailRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/email_title" />
+
+            <RadioButton
+                android:id="@+id/reminder_smsRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sms" />
+        </RadioGroup>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -124,6 +124,9 @@
     <string name="join_waitlist">Join waitlist</string>
     <string name="confirm_alert">Confirm</string>
     <string name="added_to_waitlist">You have been added to the waitlist</string>
+    <string name="how_would_you_like_to_be_reminded">How would you like to be reminded?</string>
+    <string name="sms">SMS</string>
+    <string name="email_title">Email</string>
     <string-array name="time">
         <item>1</item>
         <item>2</item>

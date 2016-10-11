@@ -136,8 +136,8 @@ public class BookingDetailActivity extends AppCompatActivity {
                 reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(parent.getContext(), "Clicked : " +
-                                parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(parent.getContext(), "Clicked : " +
+                                parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();*/
                     }
 
                     @Override
