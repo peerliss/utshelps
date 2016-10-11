@@ -67,7 +67,7 @@ public class BookingDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> map = dataSnapshot.getValue(Map.class);
                 getData(map);
-                if (checkAttendance.equals("false")) {
+                if ((checkAttendance.equals("false")||checkAttendance.equals("no"))||checkAttendance.isEmpty()) {
                     attendanceBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -134,8 +134,11 @@ public class BookingDetailActivity extends AppCompatActivity {
                 alertDialogBuilder.setTitle("Do you want to get informed by Email or SMS?");
 
                 reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    public static final String BOOKING_DETAIL_ACTIVITY = "BookingDetailActivity";
+
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d(BOOKING_DETAIL_ACTIVITY, "reminderSpinner");
                         /*Toast.makeText(parent.getContext(), "Clicked : " +
                                 parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();*/
                     }
@@ -149,7 +152,7 @@ public class BookingDetailActivity extends AppCompatActivity {
 //                alertDialogBuilder.setView(reminderView);
 
                 alertDialogBuilder.setCancelable(true);
-                alertDialogBuilder.setView(reminderView).setNegativeButton("SMS", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setView(reminderView).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();
@@ -157,7 +160,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                         fRoot.updateChildren(taskMap);
                         Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
                     }
-                }).setPositiveButton("Email", new DialogInterface.OnClickListener() {
+                }).setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();

@@ -21,9 +21,27 @@ public class Session {
     private String Topic;
     private String attendanceRecorded;
     private String Type;
+    private String reminderDate;
+    private String reminderTime;
     private String reminderType;
 
-    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded, String type, String reminderType) {
+    public String getReminderDate() {
+        return reminderDate;
+    }
+
+    public void setReminderDate(String reminderDate) {
+        this.reminderDate = reminderDate;
+    }
+
+    public String getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(String reminderTime) {
+        this.reminderTime = reminderTime;
+    }
+
+    public Session(String availability, String date, String location, String sessionCode, int slot, String time, String topic, String attendanceRecorded, String type, String reminderDate, String reminderTime, String reminderType) {
         this.Availability = availability;
         this.Location = location;
         this.SessionCode = sessionCode;
@@ -33,6 +51,8 @@ public class Session {
         this.Topic = topic;
         this.attendanceRecorded = attendanceRecorded;
         this.Type = type;
+        this.reminderDate = reminderDate;
+        this.reminderTime = reminderTime;
         this.reminderType = reminderType;
 
     }
