@@ -119,6 +119,11 @@
     <string name="select_a_date">Select a date</string>
     <string name="select_a_time">Select a time</string>
     <string name="done">Done</string>
+    <string name="session_full">Session full</string>
+    <string name="waitlist_message">This session has reached max capacity, would you like to join the waitlist?</string>
+    <string name="join_waitlist">Join waitlist</string>
+    <string name="confirm_alert">Confirm</string>
+    <string name="added_to_waitlist">You have been added to the waitlist</string>
     <string-array name="time">
         <item>1</item>
         <item>2</item>
@@ -136,5 +141,10 @@
     <string-array name="ampm">
         <item>AM</item>
         <item>PM</item>
+    </string-array>
+    <string-array name="reminder">
+        <item>30 minutes prior booking</item>
+        <item>1 day prior booking</item>
+        <item>7 days prior booking</item>
     </string-array>
 </resources>

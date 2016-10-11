@@ -194,22 +194,13 @@ public class SessionDetails extends AppCompatActivity {
                                     LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                                     View promptView = layoutInflater.inflate(R.layout.reminder, null);
 
-                                    /*Spinner timeSpinner = (Spinner) promptView.findViewById(R.id.reminder_timeSpinner);
-                                    ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.time, android.R.layout.simple_spinner_item);
-                                    timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                    timeSpinner.setAdapter(timeAdapter);
-
-                                    Spinner ampmSpinner = (Spinner) promptView.findViewById(R.id.reminder_ampmSpinner);
-                                    ArrayAdapter<CharSequence> ampmAdapter = ArrayAdapter.createFromResource(getContext(), R.array.ampm, android.R.layout.simple_spinner_item);
-                                    ampmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                    ampmSpinner.setAdapter(ampmAdapter);*/
-
-//                                    EditText dateEt = (EditText) promptView.findViewById(R.id.reminder_dateTxt);
-//                                    String dateString = dateEt.getText().toString();
-//                                    timeSpinner.setSelection(0);
-//                                    ampmSpinner.setSelection(0);
-
                                     builder.setView(promptView);
+
+
+                                    Spinner reminderSpinner = (Spinner) promptView.findViewById(R.id.reminder_spinner);
+                                    ArrayAdapter<CharSequence> reminderAdapter = ArrayAdapter.createFromResource(getContext(), R.array.reminder, android.R.layout.simple_spinner_item);
+                                    reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    reminderSpinner.setAdapter(reminderAdapter);
 
                                     builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
@@ -219,7 +210,7 @@ public class SessionDetails extends AppCompatActivity {
                                     });
                                     builder.setCancelable(true);
 
-                                    builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                                    builder.setNegativeButton(R.string.confirm_alert, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
@@ -245,7 +236,50 @@ public class SessionDetails extends AppCompatActivity {
 
 
                                     });
-//                                    builder.create();
+                                    builder.create();
+                                    builder.show();
+                                }
+                                if (slot == 0) {
+                                    final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                    builder.setTitle(R.string.session_full);
+                                    builder.setMessage(R.string.waitlist_message);
+
+
+                                    builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        }
+                                    });
+                                    builder.setCancelable(true);
+
+                                    builder.setNegativeButton(R.string.join_waitlist, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Waitlist");
+//                                    DatabaseReference newSession = dataRef.child(bookKey);
+                                            DatabaseReference newSession = dataRef.push();
+                                            newSession.child("Date").setValue(date);
+                                            newSession.child("Time").setValue(time);
+                                            newSession.child("Location").setValue(location);
+                                            newSession.child("Topic").setValue(topic);
+                                            newSession.child("SessionCode").setValue(sessionCode);
+                                            newSession.child("Type").setValue(type);
+//                                    newSession.child("attendanceRecorded").setValue("false");
+//                                    newSession.child("reminderTime").setValue("11");
+//                                    newSession.child("reminderDate").setValue("12/10/2016");
+//                                    newSession.child("reminderType").setValue("email");
+
+                                            /*Map<String, Object> mapObject = new HashMap<>();
+                                            mapObject.put("Slot", slot - 1);
+                                            rootRef.updateChildren(mapObject);*/
+
+                                            Toast.makeText(getContext(), R.string.added_to_waitlist, Toast.LENGTH_LONG).show();
+                                        }
+
+
+                                    });
+                                    builder.create();
                                     builder.show();
                                 }
                             }

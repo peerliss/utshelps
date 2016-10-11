@@ -11,8 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +44,10 @@ public class BookingDetailActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String link;
     String code;
-    String checkAttendance="no";
+    String checkAttendance = "no";
     String reminderType = "email";
+
+//    Spinner reminderSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class BookingDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, String> map = dataSnapshot.getValue(Map.class);
                 getData(map);
-                if(checkAttendance.equals("no")) {
+                if (checkAttendance.equals("no")) {
                     attendanceBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -100,13 +105,12 @@ public class BookingDetailActivity extends AppCompatActivity {
                             builder.show();
                         }
                     });
-                }
-                else
-                {
+                } else {
                     attendanceBtn.setVisibility(View.GONE);
                     attendanceTv.setVisibility(View.VISIBLE);
                 }
             }
+
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
@@ -117,10 +121,37 @@ public class BookingDetailActivity extends AppCompatActivity {
         reminderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(BookingDetailActivity.this);
-                alertDialog.setTitle("Do you want to get informed by Email or SMS?");
-                alertDialog.setCancelable(true);
-                alertDialog.setPositiveButton("SMS", new DialogInterface.OnClickListener() {
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BookingDetailActivity.this);
+                final LayoutInflater layoutInflater = LayoutInflater.from(BookingDetailActivity.this);
+                final View reminderView = layoutInflater.inflate(R.layout.reminder, null);
+
+                final Spinner reminderSpinner = (Spinner) reminderView.findViewById(R.id.reminder_spinner);
+                ArrayAdapter<CharSequence> reminderAdapter = ArrayAdapter.createFromResource(BookingDetailActivity.this, R.array.reminder, android.R.layout.simple_spinner_item);
+                reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                reminderSpinner.setAdapter(reminderAdapter);
+
+
+                alertDialogBuilder.setTitle("Do you want to get informed by Email or SMS?");
+
+
+                reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(parent.getContext(), "Clicked : " +
+                                parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+//                alertDialogBuilder.setView(reminderView);
+
+                alertDialogBuilder.setCancelable(true);
+                alertDialogBuilder.setView(reminderView).setPositiveButton("SMS", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();
@@ -128,8 +159,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                         fRoot.updateChildren(taskMap);
                         Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
                     }
-                });
-                alertDialog.setNegativeButton("Email", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Email", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Map<String, Object> taskMap = new HashMap<String, Object>();
@@ -138,14 +168,13 @@ public class BookingDetailActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "You will be reminded via Email", Toast.LENGTH_LONG).show();
                     }
                 });
-                alertDialog.create();
+                AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
         });
     }
 
-    public void setReference()
-    {
+    public void setReference() {
         bookingDetail_date = (TextView) findViewById(R.id.bookingDetail_date);
         bookingDetail_time = (TextView) findViewById(R.id.bookingDetail_time);
         bookingDetail_location = (TextView) findViewById(R.id.bookingDetail_location);
@@ -155,8 +184,7 @@ public class BookingDetailActivity extends AppCompatActivity {
         attendanceTv = (TextView) findViewById(R.id.attendance_recordedTv);
     }
 
-    public void getData(Map<String, String> map)
-    {
+    public void getData(Map<String, String> map) {
         String topic = map.get("Topic");
         String location = map.get("Location");
         String date = map.get("Date");
@@ -167,7 +195,7 @@ public class BookingDetailActivity extends AppCompatActivity {
         bookingDetail_topics.setText(topic);
         bookingDetail_location.setText(location);
         bookingDetail_date.setText(date);
-        bookingDetail_time .setText(time);
+        bookingDetail_time.setText(time);
     }
 
 }
