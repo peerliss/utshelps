@@ -65,49 +65,55 @@ public class BookingDetailActivity extends AppCompatActivity {
         fRoot.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, String> map = dataSnapshot.getValue(Map.class);
-                getData(map);
-                if ((checkAttendance.equals("false")||checkAttendance.equals("no"))||checkAttendance.isEmpty()) {
-                    attendanceBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                            builder.setTitle("Please enter workshop code");
-                            LayoutInflater layoutInflater = LayoutInflater.from(context);
-                            View promptView = layoutInflater.inflate(R.layout.attendance, null);
-                            builder.setView(promptView);
-                            attendanceText = (EditText) promptView.findViewById(R.id.attendance_input);
 
-                            builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Toast.makeText(getApplicationContext(), "Please record attendance", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                            builder.setCancelable(true);
+                try {
+                    Map<String, String> map = dataSnapshot.getValue(Map.class);
+                    getData(map);
+                    if ((checkAttendance.equals("false") || checkAttendance.equals("no")) || checkAttendance.isEmpty()) {
+                        attendanceBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Please enter workshop code");
+                                LayoutInflater layoutInflater = LayoutInflater.from(context);
+                                View promptView = layoutInflater.inflate(R.layout.attendance, null);
+                                builder.setView(promptView);
+                                attendanceText = (EditText) promptView.findViewById(R.id.attendance_input);
 
-                            builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    String aText = attendanceText.getText().toString();
-                                    if (code.equals(aText)) {
-                                        Map<String, Object> taskMap = new HashMap<String, Object>();
-                                        taskMap.put("attendanceRecorded", "yes");
-                                        fRoot.updateChildren(taskMap);
-                                        Toast.makeText(getApplicationContext(), "Attendance Recorded", Toast.LENGTH_LONG).show();
-                                        attendanceBtn.setVisibility(View.GONE);
-                                        attendanceTv.setVisibility(View.VISIBLE);
-                                    } else
-                                        Toast.makeText(getApplicationContext(), "Wrong session code", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                            builder.create();
-                            builder.show();
-                        }
-                    });
-                } else {
-                    attendanceBtn.setVisibility(View.GONE);
-                    attendanceTv.setVisibility(View.VISIBLE);
+                                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Toast.makeText(getApplicationContext(), "Please record attendance", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                builder.setCancelable(true);
+
+                                builder.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        String aText = attendanceText.getText().toString();
+                                        if (code.equals(aText)) {
+                                            Map<String, Object> taskMap = new HashMap<String, Object>();
+                                            taskMap.put("attendanceRecorded", "yes");
+                                            fRoot.updateChildren(taskMap);
+                                            Toast.makeText(getApplicationContext(), "Attendance Recorded", Toast.LENGTH_LONG).show();
+                                            attendanceBtn.setVisibility(View.GONE);
+                                            attendanceTv.setVisibility(View.VISIBLE);
+                                        } else
+                                            Toast.makeText(getApplicationContext(), "Wrong session code", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                builder.create();
+                                builder.show();
+                            }
+                        });
+                    } else {
+                        attendanceBtn.setVisibility(View.GONE);
+                        attendanceTv.setVisibility(View.VISIBLE);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 

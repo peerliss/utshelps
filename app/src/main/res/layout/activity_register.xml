@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Registration"
+                android:text="@string/registration"
                 android:textColor="@color/black"
                 android:textSize="40sp"
                 android:layout_marginTop="10dp"
@@ -40,7 +40,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Best Contact Number"
+                android:hint="@string/best_contact_number"
                 android:paddingLeft="18dp"
                 android:inputType="number"
                 android:paddingTop="10dp"
@@ -59,24 +59,25 @@
                 <RadioButton android:id="@+id/undergraduate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Undergraduate"
+                    android:text="@string/undergraduate"
                     android:onClick="onRadioButtonClicked"
                     android:paddingRight="15dp"/>
 
                 <RadioButton android:id="@+id/postgraduate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Postgraduate"
+                    android:text="@string/postgraduate"
                     android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Study Year"
+                android:hint="@string/study_year"
                 android:paddingLeft="18dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
+                android:inputType="number"
                 android:id="@+id/yearField"
                 android:layout_marginBottom="20dp"/>
 
@@ -87,19 +88,19 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/radioStatusGroup"
-                android:checkedButton="@+id/international">
+                android:checkedButton="@+id/permanent">
 
                 <RadioButton android:id="@+id/permanent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Permanent"
+                    android:text="@string/permanent"
                     android:onClick="onRadioButtonClicked"
                     android:paddingRight="15dp"/>
 
                 <RadioButton android:id="@+id/international"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="International Student"
+                    android:text="@string/international_student"
                     android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
 
@@ -107,7 +108,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Language"
+                android:hint="@string/first_language"
                 android:paddingLeft="18dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -117,7 +118,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Country of Origin"
+                android:hint="@string/country_of_origin"
                 android:paddingLeft="18dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -131,7 +132,7 @@
                 android:layout_marginBottom="25dp"
                 android:background="#44C56B"
                 android:gravity="center"
-                android:text="Register"
+                android:text="@string/register"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 

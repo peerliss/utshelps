@@ -127,6 +127,9 @@
     <string name="how_would_you_like_to_be_reminded">How would you like to be reminded?</string>
     <string name="sms">SMS</string>
     <string name="email_title">Email</string>
+    <string name="best_contact_number">Best Contact Number</string>
+    <string name="study_year">Study Year</string>
+    <string name="international_student">International Student</string>
     <string-array name="time">
         <item>1</item>
         <item>2</item>
