@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,6 +96,7 @@ public class SessionDetails extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static int position;
         private FirebaseAuth.AuthStateListener mAuth;
+        String reminderTime = "";
 
         public PlaceholderFragment() {
         }
@@ -129,6 +131,7 @@ public class SessionDetails extends AppCompatActivity {
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
             final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
 
+
             /*try {
                 Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.reminder_timeSpinner);
                 ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.time, android.R.layout.simple_spinner_item);
@@ -156,7 +159,8 @@ public class SessionDetails extends AppCompatActivity {
                     break;
             }
 
-            try {
+            try
+            {
                 final Firebase rootRef = new Firebase(link);
 
                 rootRef.addValueEventListener(new ValueEventListener() {
@@ -169,11 +173,12 @@ public class SessionDetails extends AppCompatActivity {
                         final String topic = map.get("Topic");
                         final String sessionCode = map.get("SessionCode");
                         final String type = map.get("Type");
+                        final String staff = map.get("Staff");
                         final String bookKey = dataSnapshot.getKey();
                         Log.v("key", bookKey);
                         final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
                         final int slot = mapInt.get("Slot");
-
+                        final int queue = mapInt.get("Queue");
                         dateTv.setText(date);
                         timeTv.setText(time);
                         locationTv.setText(location);
@@ -197,17 +202,32 @@ public class SessionDetails extends AppCompatActivity {
 
                                     builder.setView(promptView);
 
-                                    RadioButton emailRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_emailRadioBtn);
-                                    RadioButton smsRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_smsRadioBtn);
+                                    final RadioButton emailRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_emailRadioBtn);
+                                    final RadioButton smsRadioBtn = (RadioButton) promptView.findViewById(R.id.reminder_smsRadioBtn);
 
                                     emailRadioBtn.setChecked(true);
 
-                                    Spinner reminderSpinner = (Spinner) promptView.findViewById(R.id.reminder_spinner);
+                                    final Spinner reminderSpinner = (Spinner) promptView.findViewById(R.id.reminder_spinner);
                                     ArrayAdapter<CharSequence> reminderAdapter = ArrayAdapter.createFromResource(getContext(), R.array.reminder, android.R.layout.simple_spinner_item);
                                     reminderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                     reminderSpinner.setAdapter(reminderAdapter);
 
                                     reminderSpinner.setSelection(1);
+
+                                    reminderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        public static final String BOOKING_DETAIL_ACTIVITY = "BookingDetailActivity";
+
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                            Log.d(BOOKING_DETAIL_ACTIVITY, "reminderSpinner");
+                                            reminderTime = reminderSpinner.getSelectedItem().toString();
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent) {
+
+                                        }
+                                    });
 
                                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
@@ -230,9 +250,16 @@ public class SessionDetails extends AppCompatActivity {
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
                                             newSession.child("attendanceRecorded").setValue("false");
-                                            newSession.child("reminderTime").setValue("11");
+                                            newSession.child("reminderTime").setValue(reminderTime);
                                             newSession.child("reminderDate").setValue("12/10/2016");
-                                            newSession.child("reminderType").setValue("email");
+                                            if(smsRadioBtn.isChecked()) {
+                                                newSession.child("reminderType").setValue("sms");
+                                            }
+                                            else
+                                            {
+                                                newSession.child("reminderType").setValue("email");
+                                            }
+                                            newSession.child("Staff").setValue(staff);
 
                                             Map<String, Object> mapObject = new HashMap<>();
                                             mapObject.put("Slot", slot - 1);
@@ -249,7 +276,7 @@ public class SessionDetails extends AppCompatActivity {
                                 if (slot == 0) {
                                     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     builder.setTitle(R.string.session_full);
-                                    builder.setMessage(R.string.waitlist_message);
+                                    builder.setMessage("This session has reached max capacity, would you like to join the waitlist?"+ "current queue now:" + queue);
 
 
                                     builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {

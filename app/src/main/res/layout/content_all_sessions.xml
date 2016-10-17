@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.utshelps.utshelpsapp.AllSessionsActivity"
+    tools:showIn="@layout/activity_all_sessions">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#4E62D7"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Choose your Skillset"
+            android:gravity="center_horizontal"
+            android:textColor="#FFF"
+            android:paddingTop="30dp"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:weightSum="4"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:padding="15dp"
+            android:background="@drawable/border"
+            android:id="@+id/writeSupport"
+            android:onClick="writeSupport">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WriteNow! Writing Support sessions"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:padding="15dp"
+            android:background="@drawable/border"
+            android:id="@+id/nursing"
+            android:onClick="nursing">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FY Nursing (Accelerated EN/GE) Assignment Writing"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:padding="15dp"
+            android:background="@drawable/border"
+            android:id="@+id/upass"
+            android:onClick="upass">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="U:PASS"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:padding="15dp"
+            android:background="@drawable/border"
+            android:id="@+id/upasscmitp"
+            android:onClick="upasscmitp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="U:PASSwrite for 31265 Communication for IT Professionals"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1"
+            android:padding="15dp"
+            android:background="@drawable/border"
+            android:id="@+id/upassmpo"
+            android:onClick="upassmpo">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="U:PASSwrite for 21129 Managing People and Organisation"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

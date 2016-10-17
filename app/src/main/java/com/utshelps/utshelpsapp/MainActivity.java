@@ -85,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (studentID.getText().toString().length() != 8) {
+                    Toast.makeText(getApplicationContext(), "Your student id should match 8 number", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 if (password.length() < 6) {
                     Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_LONG).show();
                     return;

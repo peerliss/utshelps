@@ -4,26 +4,35 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInstaller;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MyBookingActivity extends AppCompatActivity {
@@ -35,6 +44,7 @@ public class MyBookingActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseReference mDatabase;
     private String uid;
+    int slot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +78,6 @@ public class MyBookingActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(BookingViewHolder viewHolder, Session model, int position) {
                 boolean check = checkDate(model.getDate());
-
                 if (check) {
                     viewHolder.setDate(model.getDate());
                     viewHolder.setLocation(model.getLocation());
@@ -76,6 +85,19 @@ public class MyBookingActivity extends AppCompatActivity {
                     viewHolder.setBtn();
                     final String key = getRef(position).toString();
                     final String bookKey = getRef(position).getKey();
+                    final Firebase rootRef = new Firebase("https://utshelps-1574c.firebaseio.com/Sessions" +"/"+ bookKey);
+                    rootRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
+                            slot = mapInt.get("Slot");
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+
+                        }
+                    });
                     viewHolder.viewBooking.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -102,6 +124,11 @@ public class MyBookingActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     mDatabase.child(bookKey).removeValue();
+
+                                    Log.v("Slot", slot+"");
+                                    Map<String, Object> mapObject = new HashMap<>();
+                                    mapObject.put("Slot", slot += 1);
+                                    rootRef.updateChildren(mapObject);
                                     Toast.makeText(getApplicationContext(), "You have successfully been withdrawn", Toast.LENGTH_LONG).show();
                                 }
                             });

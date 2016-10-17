@@ -99,7 +99,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void viewSessions(View view) {
-        Intent sessionsIntent = new Intent(this, AvailableSessionsActivity.class);
+        Intent sessionsIntent = new Intent(this, AllSessionsActivity.class);
         startActivity(sessionsIntent);
     }
 
