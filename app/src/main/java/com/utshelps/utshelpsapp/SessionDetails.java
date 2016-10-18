@@ -228,7 +228,7 @@ public class SessionDetails extends AppCompatActivity {
                                             newSession.child("Topic").setValue(topic);
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
-                                            newSession.child("attendanceRecorded").setValue("false");
+                                            newSession.child("attendanceRecorded").setValue("absent");
                                             newSession.child("reminderTime").setValue(reminderTime);
                                             newSession.child("reminderDate").setValue("12/10/2016");
                                             if(smsRadioBtn.isChecked()) {

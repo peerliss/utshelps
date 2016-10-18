@@ -115,13 +115,13 @@ public class MyBookingActivity extends AppCompatActivity {
                             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyBookingActivity.this);
                             alertDialog.setTitle("Are you sure you want to cancel your booking?");
                             alertDialog.setCancelable(true);
-                            alertDialog.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                            alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
 
                                 }
                             });
-                            alertDialog.setNegativeButton("Confirm", new DialogInterface.OnClickListener() {
+                            alertDialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     mDatabase.child(bookKey).removeValue();
