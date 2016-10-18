@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (studentID.getText().toString().length() != 8) {
-                    Toast.makeText(getApplicationContext(), "Your student id should match 8 number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.id_8_numbers, Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -154,7 +154,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(MainActivity.this, R.string.enter_id_or_password, Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if (email.length() == 8) {
+            Toast.makeText(getApplicationContext(), R.string.id_8_numbers, Toast.LENGTH_LONG).show();
+        }
+        else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

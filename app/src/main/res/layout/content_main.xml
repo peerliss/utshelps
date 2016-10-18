@@ -26,6 +26,7 @@
         android:layout_marginBottom="10dp"
         android:ems="10"
         android:hint="@string/student_id"
+        android:inputType="number"
         android:paddingBottom="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
