@@ -6,11 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-/**
- * Created by timothyalfares on 10/16/2016.
- */
-public class AllSessionsActivity extends AppCompatActivity
-{
+public class AllSessionsActivity extends AppCompatActivity {
     public static final String SESSION_ONE = "session_one";
     public static final String SESSION_TWO = "session_two";
     public static final String SESSION_THREE = "session_three";
@@ -41,7 +37,7 @@ public class AllSessionsActivity extends AppCompatActivity
         Intent intent = new Intent(this, SessionDetails.class);
         intent.putExtra(SESSION_ONE, getSession("-KU9qgHKq8uakMTGVfxc"));
         intent.putExtra(SESSION_TWO, getSession("-KUA2tPqZP-qdHLfpEm0"));
-        //intent.putExtra(SESSION_THREE, getSession("Communication/Reading/-KSOZYYmZrSaTCiRmk4T"));
+
         intent.putExtra(TITLE, title);
         startActivity(intent);
     }

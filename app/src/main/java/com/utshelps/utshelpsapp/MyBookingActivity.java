@@ -55,15 +55,11 @@ public class MyBookingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView = (RecyclerView) findViewById(R.id.myBooking_recyclerView);
-        //mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
-
-        /*
-        */
     }
 
     @Override
@@ -85,19 +81,24 @@ public class MyBookingActivity extends AppCompatActivity {
                     viewHolder.setBtn();
                     final String key = getRef(position).toString();
                     final String bookKey = getRef(position).getKey();
-                    final Firebase rootRef = new Firebase("https://utshelps-1574c.firebaseio.com/Sessions" +"/"+ bookKey);
-                    rootRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
-                            slot = mapInt.get("Slot");
-                        }
+                    final Firebase rootRef = new Firebase("https://utshelps-1574c.firebaseio.com/Sessions" + "/" + bookKey);
 
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
+                    try {
+                        rootRef.addValueEventListener(new com.firebase.client.ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
+                                slot = mapInt.get("Slot");
+                            }
 
-                        }
-                    });
+                            @Override
+                            public void onCancelled(FirebaseError firebaseError) {
+
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     viewHolder.viewBooking.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -125,7 +126,7 @@ public class MyBookingActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     mDatabase.child(bookKey).removeValue();
 
-                                    Log.v("Slot", slot+"");
+                                    Log.v("Slot", slot + "");
                                     Map<String, Object> mapObject = new HashMap<>();
                                     mapObject.put("Slot", slot += 1);
                                     rootRef.updateChildren(mapObject);
@@ -143,13 +144,6 @@ public class MyBookingActivity extends AppCompatActivity {
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
 
     public void viewDetails(View view) {
         Intent intent = new Intent(MyBookingActivity.this, BookingDetailActivity.class);
@@ -198,13 +192,10 @@ public class MyBookingActivity extends AppCompatActivity {
         }
 
         public void deleteLayout() {
-//            View deleteView = mView.findViewById(R.id.myBooking_recyclerView);
             View deleteView = mView.findViewById(R.id.deleteView);
             View deleteLine = mView.findViewById(R.id.line4);
             deleteView.setVisibility(View.GONE);
             deleteLine.setVisibility(View.GONE);
         }
-
     }
-
 }

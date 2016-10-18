@@ -1,4 +1,5 @@
 package com.utshelps.utshelpsapp;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,8 +11,7 @@ import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CreateWorkshopActivity extends AppCompatActivity
-{
+public class CreateWorkshopActivity extends AppCompatActivity {
     private EditText dateField;
     private EditText locationField;
     private EditText timeField;
@@ -22,8 +22,7 @@ public class CreateWorkshopActivity extends AppCompatActivity
     private DatabaseReference dataRef;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createsession);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -38,11 +37,9 @@ public class CreateWorkshopActivity extends AppCompatActivity
         createBtn = (Button) findViewById(R.id.createBtn);
         dataRef = FirebaseDatabase.getInstance().getReference().child("Sessions").child("Upass").child("Programming");
 
-        createBtn.setOnClickListener(new View.OnClickListener()
-        {
+        createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 String date = dateField.getText().toString();
                 String location = locationField.getText().toString();
                 String time = timeField.getText().toString();

@@ -50,14 +50,9 @@ public class SessionDetails extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    //    private Firebase rootRef;
     private FirebaseAuth mAuth;
     private DatabaseReference dataRef;
 
-//    private TextView dateTv;
-//    private TextView timeTv;
-//    private TextView locationTv;
-//    private TextView topicTv;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -71,11 +66,9 @@ public class SessionDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -131,22 +124,6 @@ public class SessionDetails extends AppCompatActivity {
             final TextView topicTv = (TextView) rootView.findViewById(R.id.session_topic);
             final Button bookBtn = (Button) rootView.findViewById(R.id.session_bookBtn);
 
-
-            /*try {
-                Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.reminder_timeSpinner);
-                ArrayAdapter<CharSequence> timeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.time, android.R.layout.simple_spinner_item);
-                timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                timeSpinner.setAdapter(timeAdapter);
-
-                Spinner ampmSpinner = (Spinner) rootView.findViewById(R.id.reminder_ampmSpinner);
-                ArrayAdapter<CharSequence> ampmAdapter = ArrayAdapter.createFromResource(getContext(), R.array.ampm, android.R.layout.simple_spinner_item);
-                ampmAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                ampmSpinner.setAdapter(ampmAdapter);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }*/
-
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                 case 1:
                     link = getActivity().getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
@@ -159,8 +136,7 @@ public class SessionDetails extends AppCompatActivity {
                     break;
             }
 
-            try
-            {
+            try {
                 final Firebase rootRef = new Firebase(link);
 
                 rootRef.addValueEventListener(new ValueEventListener() {
@@ -242,7 +218,6 @@ public class SessionDetails extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
                                             DatabaseReference newSession = dataRef.child(bookKey);
-//                                            DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
@@ -252,11 +227,9 @@ public class SessionDetails extends AppCompatActivity {
                                             newSession.child("attendanceRecorded").setValue("false");
                                             newSession.child("reminderTime").setValue(reminderTime);
                                             newSession.child("reminderDate").setValue("12/10/2016");
-                                            if(smsRadioBtn.isChecked()) {
+                                            if (smsRadioBtn.isChecked()) {
                                                 newSession.child("reminderType").setValue("sms");
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 newSession.child("reminderType").setValue("email");
                                             }
                                             newSession.child("Staff").setValue(staff);
@@ -276,10 +249,10 @@ public class SessionDetails extends AppCompatActivity {
                                 if (slot == 0) {
                                     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     builder.setTitle(R.string.session_full);
-                                    builder.setMessage("This session has reached max capacity, would you like to join the waitlist?"+ "current queue now:" + queue);
+                                    builder.setMessage("This session has reached max capacity, would you like to join the waitlist? " + "Current queue: " + queue);
 
 
-                                    builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -287,22 +260,17 @@ public class SessionDetails extends AppCompatActivity {
                                     });
                                     builder.setCancelable(true);
 
-                                    builder.setNegativeButton(R.string.join_waitlist, new DialogInterface.OnClickListener() {
+                                    builder.setPositiveButton(R.string.join_waitlist, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Waitlist");
                                             DatabaseReference newSession = dataRef.child(bookKey);
-//                                          DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
                                             newSession.child("Topic").setValue(topic);
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
-//                                          newSession.child("attendanceRecorded").setValue("false");
-//                                          newSession.child("reminderTime").setValue("11");
-//                                          newSession.child("reminderDate").setValue("12/10/2016");
-//                                          newSession.child("reminderType").setValue("email");
 
                                             Toast.makeText(getContext(), R.string.added_to_waitlist, Toast.LENGTH_LONG).show();
                                         }
@@ -353,27 +321,6 @@ public class SessionDetails extends AppCompatActivity {
                 return 3;
             } else
                 return 2;
-        }
-
-        /*@Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_ONE);
-                    return "SECTION 1";
-                case 1:
-                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_TWO);
-                    return "SECTION 2";
-                case 2:
-                    link = getIntent().getStringExtra(AvailableSessionsActivity.SESSION_THREE);
-                    return "SECTION 3";
-            }
-            return null;
-        }*/
-
-        public void createAssignment() {
-
-
         }
     }
 }

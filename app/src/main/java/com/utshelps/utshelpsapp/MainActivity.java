@@ -99,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             Toast.makeText(context, R.string.id_already_registered, Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, R.string.registration_successful, Toast.LENGTH_LONG).show();
                             startActivity(new Intent(context, RegisterActivity.class));
                             finish();
@@ -148,8 +147,7 @@ public class MainActivity extends AppCompatActivity {
         String email;
         if (studentID.getText().toString().contains("@")) {
             email = studentID.getText().toString();
-        }
-        else {
+        } else {
             email = studentID.getText().toString() + getString(R.string.uts_email);
         }
         String password = studentPassword.getText().toString();
@@ -163,30 +161,10 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(context, R.string.login_successful, Toast.LENGTH_SHORT).show();
                         checkRegistration();
-                    }
-                    else
+                    } else
                         Toast.makeText(context, R.string.incorrect_password, Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login_menu, menu);
-        return true;
-    }*/
-
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

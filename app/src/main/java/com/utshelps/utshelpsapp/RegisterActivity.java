@@ -22,11 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by timothyalfares on 9/26/2016.
- */
-public class RegisterActivity extends AppCompatActivity
-{
+public class RegisterActivity extends AppCompatActivity {
     private EditText contactField;
     private EditText fLanguageField;
     private EditText countryField;
@@ -42,8 +38,7 @@ public class RegisterActivity extends AppCompatActivity
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -62,14 +57,11 @@ public class RegisterActivity extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null)
-                {
+                if (user != null) {
                     dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
-                    registerBtn.setOnClickListener(new View.OnClickListener()
-                    {
+                    registerBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View v)
-                        {
+                        public void onClick(View v) {
                             updateUser();
                             startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                         }
@@ -86,8 +78,7 @@ public class RegisterActivity extends AppCompatActivity
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void updateUser()
-    {
+    private void updateUser() {
         String contact = contactField.getText().toString();
         String language = fLanguageField.getText().toString();
         String country = countryField.getText().toString();
@@ -102,13 +93,11 @@ public class RegisterActivity extends AppCompatActivity
         String email = "";
         try {
             email = user.getEmail().substring(0, user.getEmail().indexOf("@"));
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (TextUtils.isEmpty(contact) || TextUtils.isEmpty(language) || TextUtils.isEmpty(country))
-        {
+        if (TextUtils.isEmpty(contact) || TextUtils.isEmpty(language) || TextUtils.isEmpty(country)) {
             Toast.makeText(RegisterActivity.this, R.string.enter_all_details, Toast.LENGTH_LONG).show();
             return;
         }

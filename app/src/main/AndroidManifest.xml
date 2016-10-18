@@ -113,7 +113,7 @@
         </activity>
 
         <activity
-            android:name=".createWorkshopActivity"
+            android:name=".CreateWorkshopActivity"
             android:label="All Session"
             android:theme="@style/AppTheme.NoActionBar">
 

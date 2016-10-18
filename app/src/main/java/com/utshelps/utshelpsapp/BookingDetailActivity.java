@@ -49,8 +49,6 @@ public class BookingDetailActivity extends AppCompatActivity {
     String checkAttendance = "no";
     String reminderType = "email";
 
-//    Spinner reminderSpinner;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,8 +111,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                         attendanceBtn.setVisibility(View.GONE);
                         attendanceTv.setVisibility(View.VISIBLE);
                     }
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -149,8 +146,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         Log.d(BOOKING_DETAIL_ACTIVITY, "reminderSpinner");
-                        /*Toast.makeText(parent.getContext(), "Clicked : " +
-                                parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();*/
+
                     }
 
                     @Override
@@ -183,8 +179,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                             taskMap.put("reminderType", "sms");
                             fRoot.updateChildren(taskMap);
                             Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
-                        }
-                        else if (emailRadioBtn.isChecked()) {
+                        } else if (emailRadioBtn.isChecked()) {
                             Map<String, Object> taskMap = new HashMap<String, Object>();
                             taskMap.put("reminderType", "email");
                             fRoot.updateChildren(taskMap);
@@ -221,5 +216,4 @@ public class BookingDetailActivity extends AppCompatActivity {
         bookingDetail_date.setText(date);
         bookingDetail_time.setText(time);
     }
-
 }

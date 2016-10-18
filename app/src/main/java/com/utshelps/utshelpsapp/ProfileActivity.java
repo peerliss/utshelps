@@ -67,27 +67,24 @@ public class ProfileActivity extends AppCompatActivity {
         rootRef = new Firebase(link);
         rootRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                try{
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
                     Map<String, String> map = dataSnapshot.getValue(Map.class);
                     String name = map.get("Name");
-                    String id = map.get("Email")/*.substring(0, map.get("Email").indexOf("@"))*/;
+                    String id = map.get("Email");
                     String address = map.get("Address");
                     String dob = map.get("DOB");
                     profileName.setText(name);
                     profileDOB.setText(dob);
                     profileAddress.setText(address);
                     profileId.setText(id);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
 
                 }
             }
+
             @Override
-            public void onCancelled(FirebaseError firebaseError)
-            {
+            public void onCancelled(FirebaseError firebaseError) {
             }
 
         });
@@ -140,12 +137,4 @@ public class ProfileActivity extends AppCompatActivity {
         rootRef.updateChildren(taskMap);
         Toast.makeText(ProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
 }
