@@ -46,7 +46,7 @@ public class BookingDetailActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String link;
     String code;
-    String checkAttendance = "no";
+    String checkAttendance = "absent";
     String reminderType = "email";
     String reminderTime = "";
 
@@ -70,7 +70,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                 try {
                     Map<String, String> map = dataSnapshot.getValue(Map.class);
                     getData(map);
-                    if ((checkAttendance.equals("false") || checkAttendance.equals("no")) || checkAttendance.isEmpty()) {
+                    if ((checkAttendance.equals("false") || checkAttendance.equals("no")) || checkAttendance.equals("absent") || checkAttendance.isEmpty()) {
                         attendanceBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -95,7 +95,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                                         String aText = attendanceText.getText().toString();
                                         if (code.equals(aText)) {
                                             Map<String, Object> taskMap = new HashMap<String, Object>();
-                                            taskMap.put("attendanceRecorded", "yes");
+                                            taskMap.put("attendanceRecorded", "attended");
                                             fRoot.updateChildren(taskMap);
                                             Toast.makeText(getApplicationContext(), "Attendance Recorded", Toast.LENGTH_LONG).show();
                                             attendanceBtn.setVisibility(View.GONE);
