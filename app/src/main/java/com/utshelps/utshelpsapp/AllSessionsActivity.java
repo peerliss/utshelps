@@ -54,9 +54,9 @@ public class AllSessionsActivity extends AppCompatActivity {
     public void upass(View view) {
         Intent intent = new Intent(this, SessionDetails.class);
         String title = "UPASS";
-        intent.putExtra(SESSION_ONE, getSession("Upass/Interaction Design/-KSOctQAyQlU8I_sw2JZ"));
-        intent.putExtra(SESSION_TWO, getSession("Upass/Interaction Design/-KSOdBxjOzLJAf72Pg-M"));
-        intent.putExtra(SESSION_THREE, getSession("Upass/DSA/-KSOaV3HDb8tLH-V_iTJ"));
+        intent.putExtra(SESSION_ONE, getSession("-KULMOUNDMVssRkf42Sg"));
+        intent.putExtra(SESSION_TWO, getSession("-KULMX5uiQCWLYiDuONo"));
+        intent.putExtra(SESSION_THREE, getSession("-KULMtatC4W7FX6Aicjn"));
         intent.putExtra(TITLE, title);
         startActivity(intent);
     }

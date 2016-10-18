@@ -40,7 +40,7 @@ public class BookingDetailActivity extends AppCompatActivity {
     TextView bookingDetail_date;
     TextView bookingDetail_time;
     TextView bookingDetail_location;
-    TextView bookingDetail_topics;
+    TextView bookingDetail_type;
     private Firebase fRoot;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -48,6 +48,7 @@ public class BookingDetailActivity extends AppCompatActivity {
     String code;
     String checkAttendance = "no";
     String reminderType = "email";
+    String reminderTime = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,7 +147,7 @@ public class BookingDetailActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         Log.d(BOOKING_DETAIL_ACTIVITY, "reminderSpinner");
-
+                        reminderTime = reminderSpinner.getSelectedItem().toString();
                     }
 
                     @Override
@@ -177,11 +178,13 @@ public class BookingDetailActivity extends AppCompatActivity {
                         if (smsRadioBtn.isChecked()) {
                             Map<String, Object> taskMap = new HashMap<String, Object>();
                             taskMap.put("reminderType", "sms");
+                            taskMap.put("reminderTime", reminderTime);
                             fRoot.updateChildren(taskMap);
                             Toast.makeText(getApplicationContext(), "You will be reminded via SMS", Toast.LENGTH_LONG).show();
                         } else if (emailRadioBtn.isChecked()) {
                             Map<String, Object> taskMap = new HashMap<String, Object>();
                             taskMap.put("reminderType", "email");
+                            taskMap.put("reminderTime", reminderTime);
                             fRoot.updateChildren(taskMap);
                             Toast.makeText(getApplicationContext(), "You will be reminded via Email", Toast.LENGTH_LONG).show();
                         }
@@ -197,23 +200,24 @@ public class BookingDetailActivity extends AppCompatActivity {
         bookingDetail_date = (TextView) findViewById(R.id.bookingDetail_date);
         bookingDetail_time = (TextView) findViewById(R.id.bookingDetail_time);
         bookingDetail_location = (TextView) findViewById(R.id.bookingDetail_location);
-        bookingDetail_topics = (TextView) findViewById(R.id.bookingDetail_topics);
+        bookingDetail_type = (TextView) findViewById(R.id.bookingDetail_type);
         reminderBtn = (Button) findViewById(R.id.bookingDetail_reminderBtn);
         attendanceBtn = (Button) findViewById(R.id.bookingDetail_attendanceBtn);
         attendanceTv = (TextView) findViewById(R.id.attendance_recordedTv);
     }
 
     public void getData(Map<String, String> map) {
-        String topic = map.get("Topic");
+        String type = map.get("Type");
         String location = map.get("Location");
         String date = map.get("Date");
         String time = map.get("Time");
         code = map.get("SessionCode");
         checkAttendance = map.get("attendanceRecorded");
         reminderType = map.get("reminderType");
-        bookingDetail_topics.setText(topic);
+        bookingDetail_type.setText(type);
         bookingDetail_location.setText(location);
         bookingDetail_date.setText(date);
         bookingDetail_time.setText(time);
     }
+
 }

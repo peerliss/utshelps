@@ -45,6 +45,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView = (RecyclerView) findViewById(R.id.bookingHistory_recyclerView);
+        //mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -57,7 +58,7 @@ public class BookingHistoryActivity extends AppCompatActivity {
         super.onStart();
         FirebaseRecyclerAdapter<Session, BookingViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Session, BookingViewHolder>(
                 Session.class,
-                R.layout.my_booking_item,
+                R.layout.booking_history_item,
                 BookingViewHolder.class,
                 mDatabase
         ) {
@@ -68,7 +69,9 @@ public class BookingHistoryActivity extends AppCompatActivity {
                     viewHolder.setDate(model.getDate());
                     viewHolder.setLocation(model.getLocation());
                     viewHolder.setTime(model.getTime());
-                    viewHolder.setBtn();
+                    viewHolder.setStaff(model.getStaff());
+                    viewHolder.setAttendance(model.getAttendanceRecorded());
+                    viewHolder.setType(model.getType());
                 } else {
                     viewHolder.deleteLayout();
                 }
@@ -118,6 +121,21 @@ public class BookingHistoryActivity extends AppCompatActivity {
             bookingLocation.setText(location);
         }
 
+        public void setType(String type) {
+            TextView bookingType = (TextView) mView.findViewById(R.id.myBooking_type);
+            bookingType.setText(type);
+        }
+
+        public void setStaff(String staff) {
+            TextView bookingStaff = (TextView) mView.findViewById(R.id.myBooking_staff);
+            bookingStaff.setText(staff);
+        }
+
+        public void setAttendance(String attendance) {
+            TextView bookingAttendance = (TextView) mView.findViewById(R.id.myBooking_attendance);
+            bookingAttendance.setText(attendance);
+        }
+
         public void setBtn() {
             myBooking_cancelBtn = (Button) mView.findViewById(R.id.myBooking_cancelBtn);
             viewBooking = (Button) mView.findViewById(R.id.myBooking_viewBtn);
@@ -131,5 +149,6 @@ public class BookingHistoryActivity extends AppCompatActivity {
             historyView.setVisibility(View.GONE);
             line.setVisibility(View.GONE);
         }
+
     }
 }

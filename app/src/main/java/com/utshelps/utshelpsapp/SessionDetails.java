@@ -66,9 +66,11 @@ public class SessionDetails extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -136,7 +138,8 @@ public class SessionDetails extends AppCompatActivity {
                     break;
             }
 
-            try {
+            try
+            {
                 final Firebase rootRef = new Firebase(link);
 
                 rootRef.addValueEventListener(new ValueEventListener() {
@@ -154,7 +157,7 @@ public class SessionDetails extends AppCompatActivity {
                         Log.v("key", bookKey);
                         final Map<String, Integer> mapInt = dataSnapshot.getValue(Map.class);
                         final int slot = mapInt.get("Slot");
-                        final int queue = mapInt.get("Queue");
+
                         dateTv.setText(date);
                         timeTv.setText(time);
                         locationTv.setText(location);
@@ -218,6 +221,7 @@ public class SessionDetails extends AppCompatActivity {
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Bookings");
                                             DatabaseReference newSession = dataRef.child(bookKey);
+//                                            DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
@@ -227,9 +231,11 @@ public class SessionDetails extends AppCompatActivity {
                                             newSession.child("attendanceRecorded").setValue("false");
                                             newSession.child("reminderTime").setValue(reminderTime);
                                             newSession.child("reminderDate").setValue("12/10/2016");
-                                            if (smsRadioBtn.isChecked()) {
+                                            if(smsRadioBtn.isChecked()) {
                                                 newSession.child("reminderType").setValue("sms");
-                                            } else {
+                                            }
+                                            else
+                                            {
                                                 newSession.child("reminderType").setValue("email");
                                             }
                                             newSession.child("Staff").setValue(staff);
@@ -249,10 +255,10 @@ public class SessionDetails extends AppCompatActivity {
                                 if (slot == 0) {
                                     final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                                     builder.setTitle(R.string.session_full);
-                                    builder.setMessage("This session has reached max capacity, would you like to join the waitlist? " + "Current queue: " + queue);
+                                    builder.setMessage(R.string.waitlist_message);
 
 
-                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -260,18 +266,19 @@ public class SessionDetails extends AppCompatActivity {
                                     });
                                     builder.setCancelable(true);
 
-                                    builder.setPositiveButton(R.string.join_waitlist, new DialogInterface.OnClickListener() {
+                                    builder.setNegativeButton(R.string.join_waitlist, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("Waitlist");
                                             DatabaseReference newSession = dataRef.child(bookKey);
+//                                          DatabaseReference newSession = dataRef.push();
                                             newSession.child("Date").setValue(date);
                                             newSession.child("Time").setValue(time);
                                             newSession.child("Location").setValue(location);
                                             newSession.child("Topic").setValue(topic);
                                             newSession.child("SessionCode").setValue(sessionCode);
                                             newSession.child("Type").setValue(type);
-
+//
                                             Toast.makeText(getContext(), R.string.added_to_waitlist, Toast.LENGTH_LONG).show();
                                         }
 
@@ -321,6 +328,11 @@ public class SessionDetails extends AppCompatActivity {
                 return 3;
             } else
                 return 2;
+        }
+
+        public void createAssignment() {
+
+
         }
     }
 }
